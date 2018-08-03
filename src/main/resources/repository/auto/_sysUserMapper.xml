@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htf.dao.ISysUserDao">
+    <resultMap id="BaseResultMap" type="com.htf.po.SysUser">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="id" jdbcType="VARCHAR" property="id" />
+        <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="enabled" jdbcType="VARCHAR" property="enabled" />
+        <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+        <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, login_name, password, name, email, phone, mobile, enabled, remarks, create_date, update_date, del_flag
+    </sql>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+
+        INSERT INTO sys_user (id, login_name, password, name, email, phone, mobile, enabled, remarks, create_date, update_date, del_flag) VALUES (#{id,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{enabled,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="loginName != null">
+                login_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        DELETE FROM sys_user
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByPrimaryKeys">
+        DELETE FROM sys_user where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+        #{item}
+        </foreach>
+    </delete>
+
+    <update id="updateByPrimaryKey">
+        UPDATE sys_user
+        <set>
+            login_name = #{loginName,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR},
+            name = #{name,jdbcType=VARCHAR},
+            email = #{email,jdbcType=VARCHAR},
+            phone = #{phone,jdbcType=VARCHAR},
+            mobile = #{mobile,jdbcType=VARCHAR},
+            enabled = #{enabled,jdbcType=VARCHAR},
+            remarks = #{remarks,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            update_date = #{updateDate,jdbcType=TIMESTAMP},
+            del_flag = #{delFlag,jdbcType=VARCHAR}
+        </set>
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKeySelective">
+        UPDATE sys_user
+        <set>
+            <if test="loginName != null">
+                login_name = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=VARCHAR}
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectByRecord" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user
+        <where>
+            <if test="loginName != null">
+                AND login_name = #{loginName}
+            </if>
+            <if test="password != null">
+                AND password = #{password}
+            </if>
+            <if test="name != null">
+                AND name = #{name}
+            </if>
+            <if test="email != null">
+                AND email = #{email}
+            </if>
+            <if test="phone != null">
+                AND phone = #{phone}
+            </if>
+            <if test="mobile != null">
+                AND mobile = #{mobile}
+            </if>
+            <if test="enabled != null">
+                AND enabled = #{enabled}
+            </if>
+            <if test="remarks != null">
+                AND remarks = #{remarks}
+            </if>
+            <if test="createDate != null">
+                AND create_date = #{createDate}
+            </if>
+            <if test="updateDate != null">
+                AND update_date = #{updateDate}
+            </if>
+            <if test="delFlag != null">
+                AND del_flag = #{delFlag}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByConditions" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user
+        <where>
+            <if test="loginName != null">
+                AND login_name ${loginName}
+            </if>
+            <if test="password != null">
+                AND password ${password}
+            </if>
+            <if test="name != null">
+                AND name ${name}
+            </if>
+            <if test="email != null">
+                AND email ${email}
+            </if>
+            <if test="phone != null">
+                AND phone ${phone}
+            </if>
+            <if test="mobile != null">
+                AND mobile ${mobile}
+            </if>
+            <if test="enabled != null">
+                AND enabled ${enabled}
+            </if>
+            <if test="remarks != null">
+                AND remarks ${remarks}
+            </if>
+            <if test="createDate != null">
+                AND create_date ${createDate}
+            </if>
+            <if test="updateDate != null">
+                AND update_date ${updateDate}
+            </if>
+            <if test="delFlag != null">
+                AND del_flag ${delFlag}
+            </if>
+        </where>
+            <if test="orderBy != null">
+            ORDER BY ${orderBy}
+            </if>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user
+    </select>
+
+    <insert id="batchInsert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO sys_user (id, login_name, password, name, email, phone, mobile, enabled, remarks, create_date, update_date, del_flag) values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.loginName,jdbcType=VARCHAR},
+            #{item.password,jdbcType=VARCHAR},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.email,jdbcType=VARCHAR},
+            #{item.phone,jdbcType=VARCHAR},
+            #{item.mobile,jdbcType=VARCHAR},
+            #{item.enabled,jdbcType=VARCHAR},
+            #{item.remarks,jdbcType=VARCHAR},
+            #{item.createDate,jdbcType=TIMESTAMP},
+            #{item.updateDate,jdbcType=TIMESTAMP},
+            #{item.delFlag,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <update id="batchUpdate">
+        <foreach close="" collection="list" item="item" open="" separator=";">
+            UPDATE sys_user
+            <set>
+                <if test="item.loginName != null">
+                    login_name = #{item.loginName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.password != null">
+                    password = #{item.password,jdbcType=VARCHAR},
+                </if>
+                <if test="item.name != null">
+                    name = #{item.name,jdbcType=VARCHAR},
+                </if>
+                <if test="item.email != null">
+                    email = #{item.email,jdbcType=VARCHAR},
+                </if>
+                <if test="item.phone != null">
+                    phone = #{item.phone,jdbcType=VARCHAR},
+                </if>
+                <if test="item.mobile != null">
+                    mobile = #{item.mobile,jdbcType=VARCHAR},
+                </if>
+                <if test="item.enabled != null">
+                    enabled = #{item.enabled,jdbcType=VARCHAR},
+                </if>
+                <if test="item.remarks != null">
+                    remarks = #{item.remarks,jdbcType=VARCHAR},
+                </if>
+                <if test="item.createDate != null">
+                    create_date = #{item.createDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.updateDate != null">
+                    update_date = #{item.updateDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.delFlag != null">
+                    del_flag = #{item.delFlag,jdbcType=VARCHAR}
+                </if>
+            </set>
+            WHERE id = #{item.id,jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+    <select id="count" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM sys_user
+    </select>
+</mapper>
