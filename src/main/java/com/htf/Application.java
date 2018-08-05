@@ -18,6 +18,7 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class,args);
+
     }
 
     @GetMapping("/hello")
@@ -25,4 +26,11 @@ public class Application {
         return "hello " + name;
     }
 
+    public static Long test(int num){
+        Long l = 0l;
+        for(int i = 1 ; i <= num; i++){
+            l = (l+20) * i;
+        }
+        return l;
+    }
 }
