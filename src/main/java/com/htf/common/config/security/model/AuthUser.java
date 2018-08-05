@@ -37,16 +37,20 @@ public class AuthUser extends AbstractAuthUser {
      */
     private String enabled;
 
+    public AuthUser(){}
+
     public AuthUser(
             String id,
         String loginName,
         String password,
-        String enabled
+        String enabled,
+        String mobile
     ) {
         this.id = id;
         this.loginName = loginName;
         this.password = password;
         this.enabled = enabled;
+        this.mobile = mobile;
     }
 
     public String getId() {

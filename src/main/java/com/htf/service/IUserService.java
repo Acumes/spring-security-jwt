@@ -11,4 +11,6 @@ public interface IUserService {
     UserResponse getUser(String id);
 
     SysUser getUserByUsername(String loginName);
+
+    UserResponse getCurrentUser();
 }

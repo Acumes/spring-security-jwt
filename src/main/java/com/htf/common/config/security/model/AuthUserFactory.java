@@ -22,7 +22,8 @@ public final class AuthUserFactory {
             user.getId(),
             user.getLoginName(),
             user.getPassword(),
-            user.getEnabled()
+            user.getEnabled(),
+            user.getMobile()
         );
     }
 

@@ -1,6 +1,7 @@
 package com.htf.controller;
 
 import com.htf.common.config.redis.RedisRepository;
+import com.htf.common.config.security.AuthenticationTokenFilter;
 import com.htf.controller.vo.response.UserResponse;
 import com.htf.service.IUserService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +47,22 @@ public class UserController {
     @GetMapping("/redis")
     public String testRedis(){
         return redisRepository.get("user_3");
+    }
+
+    @GetMapping("/getCurrentUser")
+    @ApiOperation(value = "获取当前用户")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "Authorization", required = true, paramType = "header",
+                            dataType = "string", value = "authorization header", defaultValue = "Bearer ")
+            }
+    )
+    public ResponseEntity<UserResponse> getCurrentUser(){
+
+//        final UserDetails userDetails = getUserDetails();
+        UserResponse response = new UserResponse();
+        response = userService.getCurrentUser();
+        return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
     }
 
 

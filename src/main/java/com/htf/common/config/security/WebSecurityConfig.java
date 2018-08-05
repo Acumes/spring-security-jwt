@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.web.cors.CorsUtils;
 
 
 /**
@@ -37,9 +39,13 @@ public class WebSecurityConfig extends AbstractWebSecurityConfig {
 
     @Override
     protected void configure(HttpSecurity security) throws Exception {
+        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry
+                = security.authorizeRequests();
+        registry.requestMatchers(CorsUtils::isPreFlightRequest).permitAll();//让Spring security放行所有preflight request
         security
             .authorizeRequests()
-            .antMatchers(HttpMethod.POST, "/auth/token").permitAll();
+            .antMatchers( "/auth/token").permitAll();
+//            .and().cors().disable();
         super.configure(security);
     }
 }
