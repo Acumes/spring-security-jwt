@@ -11,6 +11,6 @@
 - 项目依赖Mysql、Redis
 - 在application.properties中配置数据库连接、Redis连接及web访问端口
 - 执行dbscript中的数据库初始化脚本
-- 启动Application后
+- 启动Application
 
 - 博客地址:https://blog.csdn.net/a295277302/article/details/81430537
