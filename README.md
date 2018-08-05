@@ -8,6 +8,8 @@
 - 整合swagger-ui接口文档，访问地址 http://localhost:8082/swagger-ui.html
 - Mybatis数据源
 - druid sql监控
+- ![image](https://img-blog.csdn.net/20180805132948843?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2EyOTUyNzczMDI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 - 项目依赖Mysql、Redis
 - 在application.properties中配置数据库连接、Redis连接及web访问端口
 - 执行dbscript中的数据库初始化脚本
