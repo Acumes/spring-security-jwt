@@ -29,9 +29,7 @@ public class WebSecurityConfig extends AbstractWebSecurityConfig {
                 "/swagger**/**",
                 "/*/api-docs",
                 "/webjars/**",
-                "/*/sms/captcha",
-                "/*/user/password",
-                "/*/currency/**"
+                "/druid/**"
             )
             .antMatchers(HttpMethod.POST, "/*/user")
         ;

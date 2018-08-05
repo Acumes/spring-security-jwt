@@ -12,7 +12,8 @@ import java.util.TimeZone;
 /**
  * 日期工具类, 继承org.apache.commons.lang.time.DateUtils类
  *
- * @author zhangxd
+ * @author acumes
+ * @date 2018/8/4 14:13
  */
 public class DateHelper extends DateUtils {
 

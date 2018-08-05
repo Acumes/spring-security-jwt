@@ -22,7 +22,8 @@ import java.util.stream.Collectors;
  * 3. Map<propertyPath, message>
  * <p>
  *
- * @author zhangxd
+ * @author acumes
+ * @date 2018/8/4 14:13
  */
 public final class BeanValidators {
 

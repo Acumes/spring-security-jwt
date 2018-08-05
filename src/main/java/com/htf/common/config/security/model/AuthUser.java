@@ -9,9 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Security User
- *
- * @author zhangxd
+ * @author acumes
+ * @date 2018/8/4 14:13
  */
 public class AuthUser extends AbstractAuthUser {
 

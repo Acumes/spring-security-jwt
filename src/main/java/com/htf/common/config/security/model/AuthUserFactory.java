@@ -3,9 +3,8 @@ package com.htf.common.config.security.model;
 import com.htf.po.SysUser;
 
 /**
- * The type Auth user factory.
- *
- * @author zhangxd
+ * @author acumes
+ * @date 2018/8/4 14:13
  */
 public final class AuthUserFactory {
 

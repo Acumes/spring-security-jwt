@@ -3,6 +3,9 @@ package com.htf.controller;
 import com.htf.common.config.redis.RedisRepository;
 import com.htf.controller.vo.response.UserResponse;
 import com.htf.service.IUserService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,13 @@ public class UserController {
     private RedisRepository redisRepository;
 
     @GetMapping("/{id}")
+    @ApiOperation(value = "获取用户详情")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "Authorization", required = true, paramType = "header",
+                            dataType = "string", value = "authorization header", defaultValue = "Bearer ")
+            }
+    )
     public ResponseEntity<UserResponse> getUser(@PathVariable String id){
         UserResponse response = new UserResponse();
         response = userService.getUser(id);

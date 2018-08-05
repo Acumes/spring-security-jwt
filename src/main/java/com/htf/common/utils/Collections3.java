@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
  * Collections工具集.
  * 在JDK的Collections和Guava的Collections2后, 命名为Collections3.
  *
- * @author zhangxd
+ * @author acumes
+ * @date 2018/8/4 14:13
  */
 @SuppressWarnings("rawtypes")
 public final class Collections3 {

@@ -9,7 +9,8 @@ import java.util.Map;
 /**
  * 返回数据常量
  *
- * @author zhangxd
+ * @author acumes
+ * @date 2018/8/4 14:13
  */
 public final class Message {
 
