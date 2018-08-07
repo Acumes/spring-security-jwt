@@ -10,7 +10,7 @@ import java.util.Date;
  */
 @Data
 public class UserResponse {
-    private Integer id;
+    private String id;
     private String loginName;
     private String password;
     private String name;

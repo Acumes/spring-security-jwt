@@ -1,5 +1,10 @@
 package com.htf.service;
 
+import com.htf.controller.vo.request.AddUserRequest;
+import com.htf.controller.vo.request.CheckUserRequest;
+import com.htf.controller.vo.request.UpdateUserRequest;
+import com.htf.controller.vo.request.UserRequest;
+import com.htf.controller.vo.response.UserListResult;
 import com.htf.controller.vo.response.UserResponse;
 import com.htf.po.SysUser;
 
@@ -13,4 +18,16 @@ public interface IUserService {
     SysUser getUserByUsername(String loginName);
 
     UserResponse getCurrentUser();
+
+    UserListResult getUsers(UserRequest request);
+
+    void delUser(String id);
+
+    void batchDelUser(String ids);
+
+    void addUser(AddUserRequest request);
+
+    Boolean checkUser(CheckUserRequest request);
+
+    void updateUser(String id, UpdateUserRequest request);
 }

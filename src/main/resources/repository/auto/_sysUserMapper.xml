@@ -29,6 +29,9 @@
     <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
             <if test="loginName != null">
                 login_name,
             </if>
@@ -64,6 +67,9 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
             <if test="loginName != null">
                 #{loginName,jdbcType=VARCHAR},
             </if>
