@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2018-08-05 13:49:48
+Date: 2018-08-08 10:37:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -131,7 +131,18 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
+INSERT INTO `sys_user` VALUES ('1dc8f600508640688f150c6e04d5c953', 'admin1', '$2a$10$ZD6xxT.zFlxgzJxz6LCdQOOMES0v0eOZEJk2LoKKFITx.ipbB8rwa', '123123', '12312', '21312', '3123', '1', '3123131', null, null, '0');
 INSERT INTO `sys_user` VALUES ('3', 'admin', '$2a$08$onHA58Qvc93qOZZNUTev4e89YRuRtfxrOM9F35WgLEwY84eGffy9W', 'admin', '295277302@qq.com', '124123123', '188299923', '1', '12312', null, null, null);
+INSERT INTO `sys_user` VALUES ('4005c5b089dd4205a78343e6bf348cc6', 'admin8', '$2a$10$Kv53e8Ebsc/Pd5n7ASFKQegKI766R5CfCjeGjhCa8carsybJy2u96', 'admin8', 'admin8', 'admin8', 'admin8', '1', 'admin8', null, null, '0');
+INSERT INTO `sys_user` VALUES ('53005f8d6835436ba4e5d6bda080d00d', 'admin6', '$2a$10$4onsys0ubgkkAYcuAK00lOHrLMDpV1XMHb8X/Pus/U3Ju8ba52Vye', 'admin6', 'admin6', 'admin6', 'admin6', '1', 'admin6', null, null, '0');
+INSERT INTO `sys_user` VALUES ('5b4dae7582e040f48628365c63a5ad58', 'admin4', '$2a$10$kq5fSD52TsPExYp1UWDgf.L9xDacmkbLaYTg81OqMzu8O6EVb.xJu', 'admin4', 'admin4', 'admin4', 'admin4', '1', 'admin4', null, null, '0');
+INSERT INTO `sys_user` VALUES ('5d4b56b8e32a4a7cb60bb85ac8727062', 'admin2', '$2a$10$HBKJjbOfYVI.fRIOkhgkAeP/m6DwgcbmwpYFFwreGuaJZbyQCkb.m', 'admin2', 'admin2', 'admin2', 'admin2', '1', 'admin2', null, null, '0');
+INSERT INTO `sys_user` VALUES ('60c06c12f7114857a7865d4cc839d66d', 'admin9', '$2a$10$vSZ10RjSeygh4JBhaD6dZuCqijqlayZsI/rJWvTWvhLgFAZdwFlcq', 'admin9', 'admin9', 'admin9', 'admin9', '1', 'admin9', null, null, '0');
+INSERT INTO `sys_user` VALUES ('62aa2374d4014ba99f41fc065272be1f', 'admin12', '$2a$10$bzDUfx.gOzohWBpFpllUzO7vSPm6DqQeWlJxi7X.Gu3iGNTEbu1kO', 'admin12', 'admin12', 'admin12', 'admin12', '1', 'admin12', null, null, '0');
+INSERT INTO `sys_user` VALUES ('7d6d8a1bdfc146bd8829448a219fc550', 'admin11', '$2a$10$pQfQkweFcs4PYST.EOwK7eE312ZWvEzKX5AUIjmi5wrZJWgrX.m8y', 'admin11', 'admin11', 'admin11', 'admin11', '1', 'admin11', null, null, '0');
+INSERT INTO `sys_user` VALUES ('c0fca810ad7e47b7821de90ef12c2412', 'admin3', '$2a$10$EU6K7eIMU4HLXZQjjR7TSONp.0gcTIaMgGgzqR1XA8dq1MoC/LhpS', 'admin3', 'admin3', 'admin3', 'admin3', '1', 'admin3', null, null, '0');
+INSERT INTO `sys_user` VALUES ('dac7b9f4ccfb412ab099314e38f99e58', 'admin7', '$2a$10$hqGfO0wynYgxJ39QyMIc3..qBkk12bbVFWATpO4oY1L4N/yG0/mhu', 'admin7', 'admin7', 'admin7', 'admin7', '1', 'admin7', null, null, '0');
+INSERT INTO `sys_user` VALUES ('fdc591ee81384848abfc55b2b03087ed', 'admin5', '$2a$10$h4hHewvAQY4sdrfwCyglfePVOD1RD3r6azrHogMd6H/u34rDwez8i', 'admin5', 'admin5', 'admin5', 'admin5', '1', 'admin5', null, null, '0');
 
 -- ----------------------------
 -- Table structure for sys_user_copy
