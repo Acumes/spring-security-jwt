@@ -28,7 +28,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/auth")
-@Api(tags = "权限管理")
+@Api(tags = "权限管理",description = "权限API")
 public class AuthenticationController extends BaseController{
 
     /**

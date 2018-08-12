@@ -17,15 +17,16 @@
         <include refid="Base_Column_List"/>
         FROM sys_user
         WHERE 1 =1
-        <if test="user.loginName != ''">
+        <if test="user.loginName != null and user.loginName != ''">
             AND login_name = #{user.loginName,jdbcType=VARCHAR}
         </if>
-        <if test="user.mobile != ''">
+        <if test="user.mobile != null and user.mobile != ''">
             AND mobile = #{user.mobile,jdbcType=VARCHAR}
         </if>
-        <if test="user.enable != ''">
+        <if test="user.enable != null and user.enable != ''">
             AND enabled = #{user.enable,jdbcType=VARCHAR}
         </if>
+        ORDER BY  create_date DESC
     </select>
     
 

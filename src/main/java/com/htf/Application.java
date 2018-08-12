@@ -12,18 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2018/8/3 15:13
  */
 @SpringBootApplication
-@RestController
 @ServletComponentScan
 public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class,args);
 
-    }
-
-    @GetMapping("/hello")
-    public String hello(@RequestParam String name){
-        return "hello " + name;
     }
 
     public static Long test(int num){

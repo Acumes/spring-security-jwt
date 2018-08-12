@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/users")
-@Api(value = "/users", description = "用户API")
+@Api(tags = "用户管理",value = "/users", description = "用户API")
 public class UserController {
 
     @Autowired
@@ -46,11 +46,6 @@ public class UserController {
         response = userService.getUser(id);
         redisRepository.set("user_"+id,response.getLoginName());
         return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/redis")
-    public String testRedis(){
-        return redisRepository.get("user_3");
     }
 
     @GetMapping("/getCurrentUser")

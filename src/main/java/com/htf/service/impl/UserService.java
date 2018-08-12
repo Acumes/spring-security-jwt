@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -100,6 +101,7 @@ public class UserService implements IUserService {
         BeanUtils.copyProperties(request,sysUser);
         sysUser.setPassword(new BCryptPasswordEncoder().encode(request.getPassword()));
         sysUser.setId(UuidGenerateUtil.generateUuid());
+        sysUser.setCreateDate(new Date());
         sysUserDao.insertSelective(sysUser);
     }
 
@@ -116,6 +118,7 @@ public class UserService implements IUserService {
         sysUser.setId(id);
         System.out.println(request.getIsEditPassword());
         sysUser.setPassword("true".equals(request.getIsEditPassword() ) ? new BCryptPasswordEncoder().encode(request.getPassword()) : null);
+        sysUser.setUpdateDate(new Date());
         sysUserDao.updateByPrimaryKeySelective(sysUser);
     }
 }
