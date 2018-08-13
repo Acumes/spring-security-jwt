@@ -57,7 +57,7 @@ public class RoleService implements IRoleService {
         SysRole sysRole = new SysRole();
         BeanUtils.copyProperties(request,sysRole);
         sysRole.setId(UuidGenerateUtil.generateUuid());
-        sysRole.setCreateTime(new Date());
+        sysRole.setCreateDate(new Date());
         sysRole.setEnabled("1");
         sysRole.setCreateUser(CommonUtils.getCurrentUser().getId());
         sysRoleDao.insertSelective(sysRole);
@@ -67,9 +67,33 @@ public class RoleService implements IRoleService {
     public void updateRole(UpdateRoleRequest request) {
         SysRole sysRole = new SysRole();
         BeanUtils.copyProperties(request,sysRole);
-        sysRole.setUpdateTime(new Date());
+        sysRole.setUpdateDate(new Date());
         sysRole.setUpdateUser(CommonUtils.getCurrentUser().getId());
         sysRoleDao.updateByPrimaryKeySelective(sysRole);
+    }
+
+    @Override
+    public void delRole(String id) {
+        sysRoleDao.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void batchDelRoles(String ids) {
+        String [] ids_ = ids.split(",");
+        for(String id : ids_){
+            this.delRole(id);
+        }
+    }
+
+    @Override
+    public RoleResponse getRole(String id) {
+        SysRole sysRole = sysRoleDao.selectByPrimaryKey(id);
+        if(sysRole == null){
+
+        }
+        RoleResponse result = new RoleResponse();
+        BeanUtils.copyProperties(sysRole,result);
+        return result;
     }
 
 }

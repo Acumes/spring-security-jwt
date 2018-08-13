@@ -7,19 +7,19 @@
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="remarks" jdbcType="VARCHAR" property="remarks" />
         <result column="create_user" jdbcType="VARCHAR" property="createUser" />
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
         <result column="enabled" jdbcType="VARCHAR" property="enabled" />
         <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, name, remarks, create_user, create_time, enabled, update_user, update_time
+        id, name, remarks, create_user, create_date, enabled, update_user, update_date
     </sql>
 
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
 
-        INSERT INTO sys_role (id, name, remarks, create_user, create_time, enabled, update_user, update_time) VALUES (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+        INSERT INTO sys_role (id, name, remarks, create_user, create_date, enabled, update_user, update_date) VALUES (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{enabled,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP})
     </insert>
 
     <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true">
@@ -37,8 +37,8 @@
             <if test="createUser != null">
                 create_user,
             </if>
-            <if test="createTime != null">
-                create_time,
+            <if test="createDate != null">
+                create_date,
             </if>
             <if test="enabled != null">
                 enabled,
@@ -46,8 +46,8 @@
             <if test="updateUser != null">
                 update_user,
             </if>
-            <if test="updateTime != null">
-                update_time,
+            <if test="updateDate != null">
+                update_date,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -63,8 +63,8 @@
             <if test="createUser != null">
                 #{createUser,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
             </if>
             <if test="enabled != null">
                 #{enabled,jdbcType=VARCHAR},
@@ -72,8 +72,8 @@
             <if test="updateUser != null">
                 #{updateUser,jdbcType=VARCHAR},
             </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -96,10 +96,10 @@
             name = #{name,jdbcType=VARCHAR},
             remarks = #{remarks,jdbcType=VARCHAR},
             create_user = #{createUser,jdbcType=VARCHAR},
-            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
             enabled = #{enabled,jdbcType=VARCHAR},
             update_user = #{updateUser,jdbcType=VARCHAR},
-            update_time = #{updateTime,jdbcType=TIMESTAMP}
+            update_date = #{updateDate,jdbcType=TIMESTAMP}
         </set>
         WHERE id = #{id,jdbcType=VARCHAR}
     </update>
@@ -116,8 +116,8 @@
             <if test="createUser != null">
                 create_user = #{createUser,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
             </if>
             <if test="enabled != null">
                 enabled = #{enabled,jdbcType=VARCHAR},
@@ -125,8 +125,8 @@
             <if test="updateUser != null">
                 update_user = #{updateUser,jdbcType=VARCHAR},
             </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP}
             </if>
         </set>
         WHERE id = #{id,jdbcType=VARCHAR}
@@ -162,8 +162,8 @@
             <if test="createUser != null">
                 AND create_user = #{createUser}
             </if>
-            <if test="createTime != null">
-                AND create_time = #{createTime}
+            <if test="createDate != null">
+                AND create_date = #{createDate}
             </if>
             <if test="enabled != null">
                 AND enabled = #{enabled}
@@ -171,8 +171,8 @@
             <if test="updateUser != null">
                 AND update_user = #{updateUser}
             </if>
-            <if test="updateTime != null">
-                AND update_time = #{updateTime}
+            <if test="updateDate != null">
+                AND update_date = #{updateDate}
             </if>
         </where>
     </select>
@@ -191,8 +191,8 @@
             <if test="createUser != null">
                 AND create_user ${createUser}
             </if>
-            <if test="createTime != null">
-                AND create_time ${createTime}
+            <if test="createDate != null">
+                AND create_date ${createDate}
             </if>
             <if test="enabled != null">
                 AND enabled ${enabled}
@@ -200,8 +200,8 @@
             <if test="updateUser != null">
                 AND update_user ${updateUser}
             </if>
-            <if test="updateTime != null">
-                AND update_time ${updateTime}
+            <if test="updateDate != null">
+                AND update_date ${updateDate}
             </if>
         </where>
             <if test="orderBy != null">
@@ -216,16 +216,16 @@
     </select>
 
     <insert id="batchInsert" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO sys_role (id, name, remarks, create_user, create_time, enabled, update_user, update_time) values
+        INSERT INTO sys_role (id, name, remarks, create_user, create_date, enabled, update_user, update_date) values
         <foreach collection="list" item="item" separator=",">
             (
             #{item.name,jdbcType=VARCHAR},
             #{item.remarks,jdbcType=VARCHAR},
             #{item.createUser,jdbcType=VARCHAR},
-            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.createDate,jdbcType=TIMESTAMP},
             #{item.enabled,jdbcType=VARCHAR},
             #{item.updateUser,jdbcType=VARCHAR},
-            #{item.updateTime,jdbcType=TIMESTAMP}
+            #{item.updateDate,jdbcType=TIMESTAMP}
             )
         </foreach>
     </insert>
@@ -243,8 +243,8 @@
                 <if test="item.createUser != null">
                     create_user = #{item.createUser,jdbcType=VARCHAR},
                 </if>
-                <if test="item.createTime != null">
-                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
+                <if test="item.createDate != null">
+                    create_date = #{item.createDate,jdbcType=TIMESTAMP},
                 </if>
                 <if test="item.enabled != null">
                     enabled = #{item.enabled,jdbcType=VARCHAR},
@@ -252,8 +252,8 @@
                 <if test="item.updateUser != null">
                     update_user = #{item.updateUser,jdbcType=VARCHAR},
                 </if>
-                <if test="item.updateTime != null">
-                    update_time = #{item.updateTime,jdbcType=TIMESTAMP}
+                <if test="item.updateDate != null">
+                    update_date = #{item.updateDate,jdbcType=TIMESTAMP}
                 </if>
             </set>
             WHERE id = #{item.id,jdbcType=VARCHAR}

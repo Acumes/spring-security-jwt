@@ -9,8 +9,8 @@ public class SysRole {
     private String name;
     private String remarks;
     private String createUser;
-    private Date createTime;
+    private Date createDate;
     private String enabled;
     private String updateUser;
-    private Date updateTime;
+    private Date updateDate;
 }
