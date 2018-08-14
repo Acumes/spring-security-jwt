@@ -87,12 +87,10 @@ public class MenuService implements IMenuService {
                 BeanUtils.copyProperties(item, menuTreeResponse);
                 responses.add(menuTreeResponse);
             });
-            response.setChild(responses);
-            response.getChild().forEach(item -> {
+            response.setChildren(responses);
+            response.getChildren().forEach(item -> {
                 getChild(item);
             });
-        }else{
-            response.setChild(new ArrayList<>());
         }
     }
 }

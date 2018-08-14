@@ -37,16 +37,10 @@ public class RoleService implements IRoleService {
     public RoleListResult getRoles(RoleRequest request) {
         RoleListResult result = new RoleListResult();
         CommonUtils.pageRequest(request);
-        Page<SysRole> page = PageHelper.startPage(request.getPageNo(),request.getPageSize());
-        List<SysRole> list = sysRoleDao.getRoles(request);
+        Page<RoleResponse> page = PageHelper.startPage(request.getPageNo(),request.getPageSize());
+        List<RoleResponse> list = sysRoleDao.getRoles(request);
         if(NullUtil.hasItem(list)){
-            List<RoleResponse> roleResponses = new ArrayList<>();
-            list.forEach(item -> {
-                RoleResponse response = new RoleResponse();
-                BeanUtils.copyProperties(item,response);
-                roleResponses.add(response);
-            });
-            result.setRoles(roleResponses);
+            result.setRoles(list);
         }
         result.setTotal(page.getTotal());
         return result;

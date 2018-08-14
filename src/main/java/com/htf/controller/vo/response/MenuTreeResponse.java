@@ -3,6 +3,7 @@ package com.htf.controller.vo.response;
 import com.htf.po.SysMenu;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,5 +14,5 @@ import java.util.List;
 public class MenuTreeResponse {
     private String id;
     private String name;
-    private List<MenuTreeResponse> child;
+    private List<MenuTreeResponse> children = new ArrayList<>();
 }

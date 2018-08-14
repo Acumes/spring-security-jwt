@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.htf.dao.ISysRoleDao">
-    <select id="getRoles" resultMap="BaseResultMap">
+
+    <resultMap id="Base_Result_Map" type="com.htf.controller.vo.response.RoleResponse">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="id" jdbcType="VARCHAR" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+        <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="enabled" jdbcType="VARCHAR" property="enabled" />
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+    </resultMap>
+
+    <select id="getRoles" resultMap="Base_Result_Map">
         SELECT
-        <include refid="Base_Column_List"/>
-        FROM sys_role
-        WHERE 1=1
+        <include refid="Base_Column_List"/>, sys_user.name create_user_name
+        FROM sys_role,sys_user
+        WHERE 1=1 AND sys_user.id = sys_role.create_user
         <if test="role.name != null and role.name != ''">
-            AND name = #{role.name}
+            AND sys_role.name = #{role.name}
         </if>
-        ORDER BY create_time DESC
+        <if test="role.enable != null and role.enable != ''">
+            AND sys_role.enabled = #{role.enable}
+        </if>
+            ORDER BY sys_role.create_date DESC
     </select>
 </mapper>

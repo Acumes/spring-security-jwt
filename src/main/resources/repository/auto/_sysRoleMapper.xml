@@ -14,7 +14,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, name, remarks, create_user, create_date, enabled, update_user, update_date
+        sys_role.id id, sys_role.name name, sys_role.remarks remarks, sys_role.create_user create_user, sys_role.create_date create_date, sys_role.enabled enabled, sys_role.update_user update_user, sys_role.update_date update_date
     </sql>
 
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
