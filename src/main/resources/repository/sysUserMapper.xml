@@ -38,4 +38,18 @@
             AND login_name != (select login_name from sys_user where id = #{user.userId})
         </if>
     </select>
+
+    <select id="getPermissions" resultType="String">
+        SELECT permission FROM sys_menu WHERE id IN (SELECT DISTINCT  menu_id FROM sys_user ,sys_user_role,sys_role_menu
+        WHERE id=#{id} AND id = user_id AND sys_user_role.role_id=sys_role_menu.role_id)
+    </select>
+
+    <insert id="insertRole">
+        INSERT INTO sys_user_role (user_id,role_id) VALUES (#{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="deleteRole" parameterType="java.lang.String">
+        DELETE FROM sys_user_role
+        WHERE user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
 </mapper>

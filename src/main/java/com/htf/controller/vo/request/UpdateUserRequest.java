@@ -2,6 +2,8 @@ package com.htf.controller.vo.request;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UpdateUserRequest {
     private String isEditPassword;
@@ -12,4 +14,5 @@ public class UpdateUserRequest {
     private String phone;
     private String mobile;
     private String remarks;
+    private List<String> role;
 }

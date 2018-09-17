@@ -47,8 +47,7 @@ public class WebSecurityConfig extends AbstractWebSecurityConfig {
         registry.requestMatchers(CorsUtils::isPreFlightRequest).permitAll();//让Spring security放行所有preflight request
         security
             .authorizeRequests()
-            .antMatchers( "/auth/token","/","/index").permitAll().and();
-//            .and().cors().disable();
+            .antMatchers( "/auth/token","/","/index").permitAll().and().cors();
         super.configure(security);
     }
 }

@@ -1,9 +1,9 @@
 package com.htf.controller;
 
 import com.htf.controller.vo.request.AddRoleRequest;
+import com.htf.controller.vo.request.RoleAuthorizationRequest;
 import com.htf.controller.vo.request.RoleRequest;
 import com.htf.controller.vo.request.UpdateRoleRequest;
-import com.htf.controller.vo.request.UserRequest;
 import com.htf.controller.vo.response.RoleListResult;
 import com.htf.controller.vo.response.RoleResponse;
 import com.htf.service.IRoleService;
@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author acumes
@@ -36,6 +38,7 @@ public class RoleController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+
     public ResponseEntity<RoleListResult> getRoles(@RequestBody(required = false) RoleRequest request){
         RoleListResult result = new RoleListResult();
         if(request == null){
@@ -53,8 +56,13 @@ public class RoleController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+
     public ResponseEntity<String> addRole(@RequestBody(required = true) AddRoleRequest request){
-        roleService.addRole(request);
+        try {
+            roleService.addRole(request);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return new ResponseEntity<String>("success", HttpStatus.OK);
     }
 
@@ -109,6 +117,32 @@ public class RoleController {
     public ResponseEntity<RoleResponse> getRole(@PathVariable String id){
         RoleResponse response = roleService.getRole(id);
         return new ResponseEntity<RoleResponse>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/menu/{id}")
+    @ApiOperation(value = "获取与角色绑定的菜单id")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "Authorization", required = true, paramType = "header",
+                            dataType = "string", value = "authorization header", defaultValue = "Bearer ")
+            }
+    )
+    public ResponseEntity<List<String>> getRoleMenuIds(@PathVariable String id){
+        List<String> response = roleService.getRoleMenuIds(id);
+        return new ResponseEntity<List<String>>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/authorization/{id}")
+    @ApiOperation(value = "角色授权")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "Authorization", required = true, paramType = "header",
+                            dataType = "string", value = "authorization header", defaultValue = "Bearer ")
+            }
+    )
+    public ResponseEntity<String> authorization(@PathVariable String id,@RequestBody RoleAuthorizationRequest request){
+        roleService.authorization(id, request);
+        return new ResponseEntity<String>("success", HttpStatus.OK);
     }
 
 }

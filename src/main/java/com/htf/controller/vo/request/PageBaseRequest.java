@@ -10,4 +10,5 @@ import lombok.Data;
 public class PageBaseRequest {
     private Integer pageSize;
     private Integer pageNo;
+    private boolean page = true;
 }

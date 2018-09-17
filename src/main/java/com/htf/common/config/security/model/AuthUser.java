@@ -1,11 +1,13 @@
 package com.htf.common.config.security.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.htf.common.utils.NullUtil;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -37,6 +39,12 @@ public class AuthUser extends AbstractAuthUser {
      */
     private String enabled;
 
+    /**
+     * 權限
+     */
+    private List<String> permissions;
+
+
     public AuthUser(){}
 
     public AuthUser(
@@ -44,13 +52,15 @@ public class AuthUser extends AbstractAuthUser {
         String loginName,
         String password,
         String enabled,
-        String mobile
+        String mobile,
+        List<String> permissions
     ) {
         this.id = id;
         this.loginName = loginName;
         this.password = password;
         this.enabled = enabled;
         this.mobile = mobile;
+        this.permissions = permissions;
     }
 
     public String getId() {
@@ -75,6 +85,14 @@ public class AuthUser extends AbstractAuthUser {
 
     public void setLoginName(String loginName) {
         this.loginName = loginName;
+    }
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
     }
 
     @Override
@@ -109,8 +127,16 @@ public class AuthUser extends AbstractAuthUser {
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(TRIP_USER_ROLE));
+        if(NullUtil.hasItem(this.getPermissions())){
+            for(String role : this.getPermissions()){
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + role.toUpperCase().replace(":","")));
+            }
+        }
+//        authorities.add(new SimpleGrantedAuthority(TRIP_USER_ROLE));
+
         return authorities;
     }
+
+
 
 }

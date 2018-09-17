@@ -1,6 +1,7 @@
 package com.htf.controller;
 
 import com.htf.controller.vo.request.AddMenuRequest;
+import com.htf.controller.vo.request.MenuTreeRequest;
 import com.htf.controller.vo.response.MenuResponse;
 import com.htf.controller.vo.response.MenuTreeResponse;
 import com.htf.service.IMenuService;
@@ -28,7 +29,7 @@ public class MenuController {
     @Autowired
     private IMenuService menuService;
 
-    @GetMapping("/tree")
+    @PostMapping("/tree")
     @ApiOperation(value = "获取菜单树")
     @ApiImplicitParams(
             {
@@ -36,8 +37,11 @@ public class MenuController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
-    public ResponseEntity<List<MenuTreeResponse>> getMenuTree(){
-        List<MenuTreeResponse> result= menuService.getMenuTree();
+    public ResponseEntity<List<MenuTreeResponse>> getMenuTree(@RequestBody(required = false) MenuTreeRequest request){
+        if(request == null){
+            request = new MenuTreeRequest();
+        }
+        List<MenuTreeResponse> result= menuService.getMenuTree(request);
         return new ResponseEntity<List<MenuTreeResponse>>(result, HttpStatus.OK);
     }
 
@@ -75,7 +79,7 @@ public class MenuController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
-    public ResponseEntity<String> updateMenu(@PathVariable AddMenuRequest request){
+    public ResponseEntity<String> updateMenu(@RequestBody AddMenuRequest request){
         menuService.updateMenu(request);
         return new ResponseEntity<String>("success", HttpStatus.OK);
     }
@@ -87,9 +91,22 @@ public class MenuController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
-    public ResponseEntity<String> addMenu(@PathVariable AddMenuRequest request){
-        menuService.addMenu(request);
-        return new ResponseEntity<String>("success", HttpStatus.OK);
+    public ResponseEntity<String> addMenu(@RequestBody AddMenuRequest request){
+        String id = menuService.addMenu(request);
+        return new ResponseEntity<String>(id, HttpStatus.OK);
+    }
+
+    @GetMapping("/isChild/{id}")
+    @ApiOperation(value = "查询是否有子菜单")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "Authorization", required = true, paramType = "header",
+                            dataType = "string", value = "authorization header", defaultValue = "Bearer ")
+            }
+    )
+    public ResponseEntity<Integer> getCountChild(@PathVariable String id){
+        Integer count = menuService.getCountChild(id);
+        return new ResponseEntity<Integer>(count, HttpStatus.OK);
     }
 
 }

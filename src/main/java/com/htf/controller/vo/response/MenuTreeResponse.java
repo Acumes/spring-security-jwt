@@ -14,5 +14,10 @@ import java.util.List;
 public class MenuTreeResponse {
     private String id;
     private String name;
+    private String icon;
+    private String permission;
+    private String isShow;
+    private String remarks;
+    private String parentId;
     private List<MenuTreeResponse> children = new ArrayList<>();
 }

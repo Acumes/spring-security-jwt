@@ -3,6 +3,7 @@ package com.htf.controller.vo.response;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author acumes
@@ -22,4 +23,7 @@ public class UserResponse {
     private Date createDate;
     private Date updateDate;
     private String delFlag;
+    private List<String> permissions;
+    private String roles;
+    private String rolesName;
 }

@@ -8,6 +8,8 @@ import com.htf.controller.vo.response.UserListResult;
 import com.htf.controller.vo.response.UserResponse;
 import com.htf.po.SysUser;
 
+import java.util.List;
+
 /**
  * @author acumes
  * @date 2018/8/3 15:34
@@ -30,4 +32,6 @@ public interface IUserService {
     Boolean checkUser(CheckUserRequest request);
 
     void updateUser(String id, UpdateUserRequest request);
+
+    List<String> getPermissions(String id);
 }

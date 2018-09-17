@@ -14,7 +14,28 @@
         <include refid="Base_Column_List"/>
         FROM sys_menu
         WHERE parent_id = #{id}
+        <if test="menu.isShow != null">
+          AND is_show = '1'
+        </if>
         ORDER BY sort ASC,create_date DESC
     </select>
+
+    <select id="getSort" resultType="Integer">
+        SELECT max(sort) from sys_menu
+        WHERE parent_id = #{parentId}
+    </select>
+
+    <select id="getCountChild" resultType="Integer">
+        SELECT count(id) from sys_menu
+        WHERE parent_id = #{parentId}
+    </select>
+    <select id="getChildIds" resultType="java.lang.String">
+        SELECT id from sys_menu
+        WHERE parent_id = #{parentId}
+    </select>
+
+    <delete id="deleteRoleMenu">
+        DELETE FROM sys_menu WHERE menu_id=#{id}
+    </delete>
 
 </mapper>

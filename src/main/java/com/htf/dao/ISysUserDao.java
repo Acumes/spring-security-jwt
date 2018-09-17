@@ -22,4 +22,10 @@ public interface ISysUserDao extends BaseMapper<SysUser, String> {
     List<SysUser> getUsers(@Param("user") UserRequest request);
 
     Integer checkUser(@Param("user") CheckUserRequest request);
+
+    List<String> getPermissions(@Param("id")String id);
+
+    void insertRole(@Param("roleId")String roleId, @Param("userId")String userId);
+
+    void deleteRole(@Param("userId")String id);
 }

@@ -6,6 +6,7 @@ import com.htf.common.utils.CommonUtils;
 import com.htf.common.utils.NullUtil;
 import com.htf.common.utils.UuidGenerateUtil;
 import com.htf.controller.vo.request.AddRoleRequest;
+import com.htf.controller.vo.request.RoleAuthorizationRequest;
 import com.htf.controller.vo.request.RoleRequest;
 import com.htf.controller.vo.request.UpdateRoleRequest;
 import com.htf.controller.vo.response.RoleListResult;
@@ -18,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,13 +36,18 @@ public class RoleService implements IRoleService {
     @Override
     public RoleListResult getRoles(RoleRequest request) {
         RoleListResult result = new RoleListResult();
-        CommonUtils.pageRequest(request);
-        Page<RoleResponse> page = PageHelper.startPage(request.getPageNo(),request.getPageSize());
+        Page<RoleResponse> page = null;
+        if(request.isPage()){
+            CommonUtils.pageRequest(request);
+            page = PageHelper.startPage(request.getPageNo(),request.getPageSize());
+        }
         List<RoleResponse> list = sysRoleDao.getRoles(request);
         if(NullUtil.hasItem(list)){
             result.setRoles(list);
         }
-        result.setTotal(page.getTotal());
+        if(request.isPage()){
+            result.setTotal(page.getTotal());
+        }
         return result;
     }
 
@@ -69,6 +74,7 @@ public class RoleService implements IRoleService {
     @Override
     public void delRole(String id) {
         sysRoleDao.deleteByPrimaryKey(id);
+        sysRoleDao.deleteRoleMenu(id);
     }
 
     @Override
@@ -88,6 +94,29 @@ public class RoleService implements IRoleService {
         RoleResponse result = new RoleResponse();
         BeanUtils.copyProperties(sysRole,result);
         return result;
+    }
+
+    @Override
+    public List<String> getRoleMenuIds(String id) {
+        List<String> result = sysRoleDao.getRoleMenuIds(id);
+        return result;
+    }
+
+    @Override
+    public void authorization(String roleId, RoleAuthorizationRequest request) {
+        //先删除之前的再插入
+        sysRoleDao.deleteRoleMenu(roleId);
+        insertAuthorization(roleId, request.getCheckIds(), "1");
+        insertAuthorization(roleId, request.getNoCheckIds(), "0");
+
+    }
+
+    private void insertAuthorization(String roleId, List<String> ids,String check) {
+        if(NullUtil.hasItem(ids)){
+            ids.forEach(menuId -> {
+                sysRoleDao.authorization(roleId,menuId,check);
+            });
+        }
     }
 
 }

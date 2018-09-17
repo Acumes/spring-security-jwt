@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author acumes
  * @date 2018/8/3 15:19
@@ -30,7 +32,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", loginName));
         } else {
-            return AuthUserFactory.create(user);
+            List<String> permissions = userService.getPermissions(user.getId());
+            return AuthUserFactory.create(user,permissions);
         }
     }
 }
+
+

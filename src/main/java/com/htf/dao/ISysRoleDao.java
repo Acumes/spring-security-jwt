@@ -12,4 +12,12 @@ import java.util.List;
 @Repository
 public interface ISysRoleDao extends BaseMapper<SysRole, String> {
     List<RoleResponse> getRoles(@Param("role") RoleRequest request);
+
+    List<String> getRoleMenuIds(@Param("id")String id);
+
+    void authorization(@Param("roleId")String roleId, @Param("menuId")String menuId, @Param("checked")String check);
+
+    void deleteRoleMenu(@Param("roleId")String roleId);
+
+    List<SysRole> getRolesByUserId(@Param("userId")String userId);
 }

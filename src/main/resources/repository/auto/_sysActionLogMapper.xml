@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htf.dao.ISysActionLogDao">
+    <resultMap id="BaseResultMap" type="com.htf.po.SysActionLog">
+        <id column="log_id" jdbcType="INTEGER" property="logId" />
+        <result column="log_id" jdbcType="INTEGER" property="logId" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+        <result column="ip" jdbcType="VARCHAR" property="ip" />
+        <result column="function_name" jdbcType="VARCHAR" property="functionName" />
+        <result column="start_time" jdbcType="DATE" property="startTime" />
+        <result column="end_time" jdbcType="DATE" property="endTime" />
+        <result column="res_json" jdbcType="VARCHAR" property="resJson" />
+        <result column="req_json" jdbcType="VARCHAR" property="reqJson" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        log_id, url, customer_id, ip, function_name, start_time, end_time, res_json, req_json, create_time, company_id, status
+    </sql>
+
+    <insert id="insert" keyProperty="logId" useGeneratedKeys="true">
+
+        INSERT INTO sys_action_log (url, customer_id, ip, function_name, start_time, end_time, res_json, req_json, create_time, company_id, status) VALUES (#{url,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{functionName,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{resJson,jdbcType=VARCHAR}, #{reqJson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{companyId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" keyProperty="logId" useGeneratedKeys="true">
+        INSERT INTO sys_action_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="url != null">
+                url,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+            <if test="functionName != null">
+                function_name,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="resJson != null">
+                res_json,
+            </if>
+            <if test="reqJson != null">
+                req_json,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="functionName != null">
+                #{functionName,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=DATE},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=DATE},
+            </if>
+            <if test="resJson != null">
+                #{resJson,jdbcType=VARCHAR},
+            </if>
+            <if test="reqJson != null">
+                #{reqJson,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM sys_action_log
+        WHERE log_id = #{logId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByPrimaryKeys">
+        DELETE FROM sys_action_log where log_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+        #{item}
+        </foreach>
+    </delete>
+
+    <update id="updateByPrimaryKey">
+        UPDATE sys_action_log
+        <set>
+            url = #{url,jdbcType=VARCHAR},
+            customer_id = #{customerId,jdbcType=VARCHAR},
+            ip = #{ip,jdbcType=VARCHAR},
+            function_name = #{functionName,jdbcType=VARCHAR},
+            start_time = #{startTime,jdbcType=DATE},
+            end_time = #{endTime,jdbcType=DATE},
+            res_json = #{resJson,jdbcType=VARCHAR},
+            req_json = #{reqJson,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            company_id = #{companyId,jdbcType=VARCHAR},
+            status = #{status,jdbcType=INTEGER}
+        </set>
+        WHERE log_id = #{logId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKeySelective">
+        UPDATE sys_action_log
+        <set>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                ip = #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="functionName != null">
+                function_name = #{functionName,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=DATE},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=DATE},
+            </if>
+            <if test="resJson != null">
+                res_json = #{resJson,jdbcType=VARCHAR},
+            </if>
+            <if test="reqJson != null">
+                req_json = #{reqJson,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE log_id = #{logId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_action_log
+        WHERE log_id = #{logId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_action_log where log_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectByRecord" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_action_log
+        <where>
+            <if test="url != null">
+                AND url = #{url}
+            </if>
+            <if test="customerId != null">
+                AND customer_id = #{customerId}
+            </if>
+            <if test="ip != null">
+                AND ip = #{ip}
+            </if>
+            <if test="functionName != null">
+                AND function_name = #{functionName}
+            </if>
+            <if test="startTime != null">
+                AND start_time = #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND end_time = #{endTime}
+            </if>
+            <if test="resJson != null">
+                AND res_json = #{resJson}
+            </if>
+            <if test="reqJson != null">
+                AND req_json = #{reqJson}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime}
+            </if>
+            <if test="companyId != null">
+                AND company_id = #{companyId}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByConditions" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_action_log
+        <where>
+            <if test="url != null">
+                AND url ${url}
+            </if>
+            <if test="customerId != null">
+                AND customer_id ${customerId}
+            </if>
+            <if test="ip != null">
+                AND ip ${ip}
+            </if>
+            <if test="functionName != null">
+                AND function_name ${functionName}
+            </if>
+            <if test="startTime != null">
+                AND start_time ${startTime}
+            </if>
+            <if test="endTime != null">
+                AND end_time ${endTime}
+            </if>
+            <if test="resJson != null">
+                AND res_json ${resJson}
+            </if>
+            <if test="reqJson != null">
+                AND req_json ${reqJson}
+            </if>
+            <if test="createTime != null">
+                AND create_time ${createTime}
+            </if>
+            <if test="companyId != null">
+                AND company_id ${companyId}
+            </if>
+            <if test="status != null">
+                AND status ${status}
+            </if>
+        </where>
+            <if test="orderBy != null">
+            ORDER BY ${orderBy}
+            </if>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_action_log
+    </select>
+
+    <insert id="batchInsert" keyProperty="logId" useGeneratedKeys="true">
+        INSERT INTO sys_action_log (url, customer_id, ip, function_name, start_time, end_time, res_json, req_json, create_time, company_id, status) values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.url,jdbcType=VARCHAR},
+            #{item.customerId,jdbcType=VARCHAR},
+            #{item.ip,jdbcType=VARCHAR},
+            #{item.functionName,jdbcType=VARCHAR},
+            #{item.startTime,jdbcType=DATE},
+            #{item.endTime,jdbcType=DATE},
+            #{item.resJson,jdbcType=VARCHAR},
+            #{item.reqJson,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.companyId,jdbcType=VARCHAR},
+            #{item.status,jdbcType=INTEGER}
+            )
+        </foreach>
+    </insert>
+
+    <update id="batchUpdate">
+        <foreach close="" collection="list" item="item" open="" separator=";">
+            UPDATE sys_action_log
+            <set>
+                <if test="item.url != null">
+                    url = #{item.url,jdbcType=VARCHAR},
+                </if>
+                <if test="item.customerId != null">
+                    customer_id = #{item.customerId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.ip != null">
+                    ip = #{item.ip,jdbcType=VARCHAR},
+                </if>
+                <if test="item.functionName != null">
+                    function_name = #{item.functionName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.startTime != null">
+                    start_time = #{item.startTime,jdbcType=DATE},
+                </if>
+                <if test="item.endTime != null">
+                    end_time = #{item.endTime,jdbcType=DATE},
+                </if>
+                <if test="item.resJson != null">
+                    res_json = #{item.resJson,jdbcType=VARCHAR},
+                </if>
+                <if test="item.reqJson != null">
+                    req_json = #{item.reqJson,jdbcType=VARCHAR},
+                </if>
+                <if test="item.createTime != null">
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.companyId != null">
+                    company_id = #{item.companyId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.status != null">
+                    status = #{item.status,jdbcType=INTEGER}
+                </if>
+            </set>
+            WHERE log_id = #{item.logId,jdbcType=INTEGER}
+        </foreach>
+    </update>
+
+    <select id="count" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM sys_action_log
+    </select>
+</mapper>

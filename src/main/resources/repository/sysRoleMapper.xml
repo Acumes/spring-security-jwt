@@ -28,4 +28,26 @@
         </if>
             ORDER BY sys_role.create_date DESC
     </select>
+    <select id="getRoleMenuIds" resultType="String">
+        SELECT
+        menu_id
+        FROM sys_role_menu
+        WHERE role_id = #{id} AND `checked`= '1'
+    </select>
+
+    <insert id="authorization">
+        INSERT INTO sys_role_menu (role_id, menu_id,`checked`) VALUES (#{roleId,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}, #{checked,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="deleteRoleMenu">
+        DELETE FROM sys_role_menu
+        WHERE role_id = #{roleId,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="getRolesByUserId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_role,sys_user_role
+        WHERE sys_role.id = sys_user_role.role_id AND sys_user_role.user_id = #{userId,jdbcType=VARCHAR}
+
+    </select>
 </mapper>
