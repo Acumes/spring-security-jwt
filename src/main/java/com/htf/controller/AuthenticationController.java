@@ -2,9 +2,12 @@ package com.htf.controller;
 
 import com.htf.common.config.security.AuthenticationTokenFilter;
 import com.htf.common.config.security.utils.TokenUtil;
+import com.htf.common.exception.ServiceException;
 import com.htf.common.utils.Message;
 import com.htf.common.utils.ReturnCode;
+import com.htf.service.ISysCaptchaService;
 import io.swagger.annotations.*;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +20,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +45,13 @@ public class AuthenticationController extends BaseController{
      */
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    /**
+     * 验证码服务
+     */
+    @Autowired
+    private ISysCaptchaService sysCaptchaService;
+
     /**
      * 用户信息服务
      */
@@ -147,6 +163,28 @@ public class AuthenticationController extends BaseController{
 
         return message;
     }
+
+    /**
+     * 验证码
+     */
+    @GetMapping("captcha")
+    public void captcha(HttpServletResponse response, String uuid)throws ServletException, IOException {
+        response.setHeader("Cache-Control", "no-store, no-cache");
+        response.setContentType("image/jpeg");
+
+        //获取图片验证码
+        BufferedImage image = null;
+        try {
+            image = sysCaptchaService.getCaptcha();
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+
+        ServletOutputStream out = response.getOutputStream();
+        ImageIO.write(image, "jpg", out);
+        IOUtils.closeQuietly(out);
+    }
+
 
     /**
      * Handle business exception map.

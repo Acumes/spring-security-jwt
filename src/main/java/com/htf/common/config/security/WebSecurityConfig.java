@@ -37,6 +37,7 @@ public class WebSecurityConfig extends AbstractWebSecurityConfig {
                 "/fonts/*"
             )
             .antMatchers(HttpMethod.POST, "/*/user")
+            .antMatchers(HttpMethod.GET,"/auth/captcha")
         ;
     }
 
