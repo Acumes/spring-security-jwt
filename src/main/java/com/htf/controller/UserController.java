@@ -1,5 +1,6 @@
 package com.htf.controller;
 
+import com.htf.common.annotation.PermissionTracking;
 import com.htf.common.config.redis.RedisRepository;
 import com.htf.common.config.security.AuthenticationTokenFilter;
 import com.htf.controller.vo.request.AddUserRequest;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users")
 @Api(tags = "用户管理",value = "/users", description = "用户API")
-public class UserController {
+public class UserController extends BaseController{
 
     @Autowired
     private IUserService userService;
@@ -41,6 +42,7 @@ public class UserController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:user:view")
     public ResponseEntity<UserResponse> getUser(@PathVariable String id){
         UserResponse response = new UserResponse();
         response = userService.getUser(id);
@@ -72,6 +74,7 @@ public class UserController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:user:view")
     public ResponseEntity<UserListResult> getUsers(@RequestBody(required = false) UserRequest request){
         UserListResult result = new UserListResult();
 //        UserRequest request = new UserRequest();
@@ -90,6 +93,7 @@ public class UserController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:user:delete")
     public ResponseEntity<String> delUser(@PathVariable String id){
         userService.delUser(id);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -103,6 +107,7 @@ public class UserController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:user:delete")
     public ResponseEntity<String> batchDelUser(@RequestParam String ids){
         userService.batchDelUser(ids);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -116,6 +121,7 @@ public class UserController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:user:add")
     public ResponseEntity<String> addUser(@RequestBody AddUserRequest request){
         userService.addUser(request);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -142,6 +148,7 @@ public class UserController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:user:edit")
     public ResponseEntity<String> updateUser(@PathVariable String id,@RequestBody UpdateUserRequest request){
         userService.updateUser(id,request);
         return new ResponseEntity<String>("success", HttpStatus.OK);

@@ -2,6 +2,7 @@ package com.htf.controller;
 
 import com.htf.common.editor.DateEditor;
 import com.htf.common.editor.StringEditor;
+import com.htf.common.exception.PermissionException;
 import com.htf.common.utils.BeanValidators;
 import com.htf.common.utils.Collections3;
 import com.htf.common.utils.Message;
@@ -50,6 +51,13 @@ public abstract class BaseController {
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Map<String, Object> handleBusinessException(BusinessException ex) {
+        return makeErrorMessage(ReturnCode.INTERNAL_SERVER_ERROR, "Business Error", ex.getMessage());
+    }
+
+    @ExceptionHandler(PermissionException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, Object> handlePermissionException(PermissionException ex) {
+        System.out.println();
         return makeErrorMessage(ReturnCode.INTERNAL_SERVER_ERROR, "Business Error", ex.getMessage());
     }
 

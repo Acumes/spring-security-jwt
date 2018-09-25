@@ -1,5 +1,6 @@
 package com.htf.controller;
 
+import com.htf.common.annotation.PermissionTracking;
 import com.htf.controller.vo.request.AddRoleRequest;
 import com.htf.controller.vo.request.RoleAuthorizationRequest;
 import com.htf.controller.vo.request.RoleRequest;
@@ -25,7 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/roles")
 @Api(tags = "角色管理",value = "roles",description = "角色API")
-public class RoleController {
+public class RoleController extends BaseController{
 
     @Autowired
     private IRoleService roleService;
@@ -38,7 +39,7 @@ public class RoleController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
-
+    @PermissionTracking(methodName = "sys:role:view")
     public ResponseEntity<RoleListResult> getRoles(@RequestBody(required = false) RoleRequest request){
         RoleListResult result = new RoleListResult();
         if(request == null){
@@ -56,7 +57,7 @@ public class RoleController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
-
+    @PermissionTracking(methodName = "sys:role:add")
     public ResponseEntity<String> addRole(@RequestBody(required = true) AddRoleRequest request){
         try {
             roleService.addRole(request);
@@ -74,6 +75,7 @@ public class RoleController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:role:edit")
     public ResponseEntity<String> updateRole(@RequestBody(required = true) UpdateRoleRequest request){
         roleService.updateRole(request);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -100,6 +102,7 @@ public class RoleController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:role:delete")
     public ResponseEntity<String> batchDelRoles(@RequestParam String ids){
         roleService.batchDelRoles(ids);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -114,6 +117,7 @@ public class RoleController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:role:view")
     public ResponseEntity<RoleResponse> getRole(@PathVariable String id){
         RoleResponse response = roleService.getRole(id);
         return new ResponseEntity<RoleResponse>(response, HttpStatus.OK);

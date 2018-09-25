@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htf.dao.IScheduleJobDao">
+    <resultMap id="BaseResultMap" type="com.htf.po.ScheduleJob">
+        <id column="job_id" jdbcType="BIGINT" property="jobId" />
+        <result column="job_id" jdbcType="BIGINT" property="jobId" />
+        <result column="bean_name" jdbcType="VARCHAR" property="beanName" />
+        <result column="method_name" jdbcType="VARCHAR" property="methodName" />
+        <result column="params" jdbcType="VARCHAR" property="params" />
+        <result column="cron_expression" jdbcType="VARCHAR" property="cronExpression" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        job_id, bean_name, method_name, params, cron_expression, status, remark, create_time
+    </sql>
+
+    <insert id="insert" keyProperty="jobId" useGeneratedKeys="true">
+
+        INSERT INTO schedule_job (bean_name, method_name, params, cron_expression, status, remark, create_time) VALUES (#{beanName,jdbcType=VARCHAR}, #{methodName,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{cronExpression,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" keyProperty="jobId" useGeneratedKeys="true">
+        INSERT INTO schedule_job
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="beanName != null">
+                bean_name,
+            </if>
+            <if test="methodName != null">
+                method_name,
+            </if>
+            <if test="params != null">
+                params,
+            </if>
+            <if test="cronExpression != null">
+                cron_expression,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="beanName != null">
+                #{beanName,jdbcType=VARCHAR},
+            </if>
+            <if test="methodName != null">
+                #{methodName,jdbcType=VARCHAR},
+            </if>
+            <if test="params != null">
+                #{params,jdbcType=VARCHAR},
+            </if>
+            <if test="cronExpression != null">
+                #{cronExpression,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM schedule_job
+        WHERE job_id = #{jobId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByPrimaryKeys">
+        DELETE FROM schedule_job where job_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+        #{item}
+        </foreach>
+    </delete>
+
+    <update id="updateByPrimaryKey">
+        UPDATE schedule_job
+        <set>
+            bean_name = #{beanName,jdbcType=VARCHAR},
+            method_name = #{methodName,jdbcType=VARCHAR},
+            params = #{params,jdbcType=VARCHAR},
+            cron_expression = #{cronExpression,jdbcType=VARCHAR},
+            status = #{status,jdbcType=TINYINT},
+            remark = #{remark,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP}
+        </set>
+        WHERE job_id = #{jobId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKeySelective">
+        UPDATE schedule_job
+        <set>
+            <if test="beanName != null">
+                bean_name = #{beanName,jdbcType=VARCHAR},
+            </if>
+            <if test="methodName != null">
+                method_name = #{methodName,jdbcType=VARCHAR},
+            </if>
+            <if test="params != null">
+                params = #{params,jdbcType=VARCHAR},
+            </if>
+            <if test="cronExpression != null">
+                cron_expression = #{cronExpression,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+        </set>
+        WHERE job_id = #{jobId,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM schedule_job
+        WHERE job_id = #{jobId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM schedule_job where job_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectByRecord" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM schedule_job
+        <where>
+            <if test="beanName != null">
+                AND bean_name = #{beanName}
+            </if>
+            <if test="methodName != null">
+                AND method_name = #{methodName}
+            </if>
+            <if test="params != null">
+                AND params = #{params}
+            </if>
+            <if test="cronExpression != null">
+                AND cron_expression = #{cronExpression}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="remark != null">
+                AND remark = #{remark}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByConditions" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM schedule_job
+        <where>
+            <if test="beanName != null">
+                AND bean_name ${beanName}
+            </if>
+            <if test="methodName != null">
+                AND method_name ${methodName}
+            </if>
+            <if test="params != null">
+                AND params ${params}
+            </if>
+            <if test="cronExpression != null">
+                AND cron_expression ${cronExpression}
+            </if>
+            <if test="status != null">
+                AND status ${status}
+            </if>
+            <if test="remark != null">
+                AND remark ${remark}
+            </if>
+            <if test="createTime != null">
+                AND create_time ${createTime}
+            </if>
+        </where>
+            <if test="orderBy != null">
+            ORDER BY ${orderBy}
+            </if>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM schedule_job
+    </select>
+
+    <insert id="batchInsert" keyProperty="jobId" useGeneratedKeys="true">
+        INSERT INTO schedule_job (bean_name, method_name, params, cron_expression, status, remark, create_time) values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.beanName,jdbcType=VARCHAR},
+            #{item.methodName,jdbcType=VARCHAR},
+            #{item.params,jdbcType=VARCHAR},
+            #{item.cronExpression,jdbcType=VARCHAR},
+            #{item.status,jdbcType=TINYINT},
+            #{item.remark,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <update id="batchUpdate">
+        <foreach close="" collection="list" item="item" open="" separator=";">
+            UPDATE schedule_job
+            <set>
+                <if test="item.beanName != null">
+                    bean_name = #{item.beanName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.methodName != null">
+                    method_name = #{item.methodName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.params != null">
+                    params = #{item.params,jdbcType=VARCHAR},
+                </if>
+                <if test="item.cronExpression != null">
+                    cron_expression = #{item.cronExpression,jdbcType=VARCHAR},
+                </if>
+                <if test="item.status != null">
+                    status = #{item.status,jdbcType=TINYINT},
+                </if>
+                <if test="item.remark != null">
+                    remark = #{item.remark,jdbcType=VARCHAR},
+                </if>
+                <if test="item.createTime != null">
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP}
+                </if>
+            </set>
+            WHERE job_id = #{item.jobId,jdbcType=BIGINT}
+        </foreach>
+    </update>
+
+    <select id="count" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM schedule_job
+    </select>
+</mapper>

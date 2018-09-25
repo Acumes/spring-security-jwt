@@ -1,5 +1,6 @@
 package com.htf.controller;
 
+import com.htf.common.annotation.PermissionTracking;
 import com.htf.controller.vo.request.AddMenuRequest;
 import com.htf.controller.vo.request.MenuTreeRequest;
 import com.htf.controller.vo.response.MenuResponse;
@@ -23,7 +24,7 @@ import java.util.List;
 @RequestMapping("/menu")
 @Api(tags = "菜单管理")
 @RestController
-public class MenuController {
+public class MenuController extends BaseController{
 
 
     @Autowired
@@ -37,6 +38,7 @@ public class MenuController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:menu:view")
     public ResponseEntity<List<MenuTreeResponse>> getMenuTree(@RequestBody(required = false) MenuTreeRequest request){
         if(request == null){
             request = new MenuTreeRequest();
@@ -53,6 +55,7 @@ public class MenuController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:menu:view")
     public ResponseEntity<MenuResponse> getMenu(@PathVariable String id){
         MenuResponse result= menuService.getMenu(id);
         return new ResponseEntity<MenuResponse>(result, HttpStatus.OK);
@@ -66,6 +69,7 @@ public class MenuController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:menu:delete")
     public ResponseEntity<String> delMenu(@PathVariable String id){
         menuService.delMenu(id);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -79,6 +83,7 @@ public class MenuController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:menu:edit")
     public ResponseEntity<String> updateMenu(@RequestBody AddMenuRequest request){
         menuService.updateMenu(request);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -91,6 +96,7 @@ public class MenuController {
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @PermissionTracking(methodName = "sys:menu:add")
     public ResponseEntity<String> addMenu(@RequestBody AddMenuRequest request){
         String id = menuService.addMenu(request);
         return new ResponseEntity<String>(id, HttpStatus.OK);
