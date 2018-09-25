@@ -29,7 +29,7 @@ public class SysCaptchaService implements ISysCaptchaService {
         //生成文字验证码
         String code = producer.createText();
         //五分钟过期
-        redisRepository.setExpire(code,code,1000 * 5 * 60);
+        redisRepository.setExpire(code,code,5 * 60);
         return producer.createImage(code);
     }
 
