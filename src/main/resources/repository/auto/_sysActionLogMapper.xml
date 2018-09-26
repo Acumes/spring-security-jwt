@@ -5,7 +5,7 @@
         <id column="log_id" jdbcType="INTEGER" property="logId" />
         <result column="log_id" jdbcType="INTEGER" property="logId" />
         <result column="url" jdbcType="VARCHAR" property="url" />
-        <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+        <result column="create_user" jdbcType="VARCHAR" property="createUser" />
         <result column="ip" jdbcType="VARCHAR" property="ip" />
         <result column="function_name" jdbcType="VARCHAR" property="functionName" />
         <result column="start_time" jdbcType="DATE" property="startTime" />
@@ -13,17 +13,18 @@
         <result column="res_json" jdbcType="VARCHAR" property="resJson" />
         <result column="req_json" jdbcType="VARCHAR" property="reqJson" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="company_id" jdbcType="VARCHAR" property="companyId" />
         <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="log_type" jdbcType="VARCHAR" property="logType" />
+        <result column="external_id" jdbcType="VARCHAR" property="externalId" />
     </resultMap>
 
     <sql id="Base_Column_List">
-        log_id, url, customer_id, ip, function_name, start_time, end_time, res_json, req_json, create_time, company_id, status
+        log_id, url, create_user, ip, function_name, start_time, end_time, res_json, req_json, create_time, status, log_type, external_id
     </sql>
 
     <insert id="insert" keyProperty="logId" useGeneratedKeys="true">
 
-        INSERT INTO sys_action_log (url, customer_id, ip, function_name, start_time, end_time, res_json, req_json, create_time, company_id, status) VALUES (#{url,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{functionName,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{resJson,jdbcType=VARCHAR}, #{reqJson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{companyId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+        INSERT INTO sys_action_log (url, create_user, ip, function_name, start_time, end_time, res_json, req_json, create_time, status, log_type, external_id) VALUES (#{url,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{functionName,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{resJson,jdbcType=VARCHAR}, #{reqJson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{logType,jdbcType=VARCHAR}, #{externalId,jdbcType=VARCHAR})
     </insert>
 
     <insert id="insertSelective" keyProperty="logId" useGeneratedKeys="true">
@@ -32,8 +33,8 @@
             <if test="url != null">
                 url,
             </if>
-            <if test="customerId != null">
-                customer_id,
+            <if test="createUser != null">
+                create_user,
             </if>
             <if test="ip != null">
                 ip,
@@ -56,19 +57,22 @@
             <if test="createTime != null">
                 create_time,
             </if>
-            <if test="companyId != null">
-                company_id,
-            </if>
             <if test="status != null">
                 status,
+            </if>
+            <if test="logType != null">
+                log_type,
+            </if>
+            <if test="externalId != null">
+                external_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="url != null">
                 #{url,jdbcType=VARCHAR},
             </if>
-            <if test="customerId != null">
-                #{customerId,jdbcType=VARCHAR},
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
             </if>
             <if test="ip != null">
                 #{ip,jdbcType=VARCHAR},
@@ -91,11 +95,14 @@
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="companyId != null">
-                #{companyId,jdbcType=VARCHAR},
-            </if>
             <if test="status != null">
                 #{status,jdbcType=INTEGER},
+            </if>
+            <if test="logType != null">
+                #{logType,jdbcType=VARCHAR},
+            </if>
+            <if test="externalId != null">
+                #{externalId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -116,7 +123,7 @@
         UPDATE sys_action_log
         <set>
             url = #{url,jdbcType=VARCHAR},
-            customer_id = #{customerId,jdbcType=VARCHAR},
+            create_user = #{createUser,jdbcType=VARCHAR},
             ip = #{ip,jdbcType=VARCHAR},
             function_name = #{functionName,jdbcType=VARCHAR},
             start_time = #{startTime,jdbcType=DATE},
@@ -124,8 +131,9 @@
             res_json = #{resJson,jdbcType=VARCHAR},
             req_json = #{reqJson,jdbcType=VARCHAR},
             create_time = #{createTime,jdbcType=TIMESTAMP},
-            company_id = #{companyId,jdbcType=VARCHAR},
-            status = #{status,jdbcType=INTEGER}
+            status = #{status,jdbcType=INTEGER},
+            log_type = #{logType,jdbcType=VARCHAR},
+            external_id = #{externalId,jdbcType=VARCHAR}
         </set>
         WHERE log_id = #{logId,jdbcType=INTEGER}
     </update>
@@ -136,8 +144,8 @@
             <if test="url != null">
                 url = #{url,jdbcType=VARCHAR},
             </if>
-            <if test="customerId != null">
-                customer_id = #{customerId,jdbcType=VARCHAR},
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=VARCHAR},
             </if>
             <if test="ip != null">
                 ip = #{ip,jdbcType=VARCHAR},
@@ -160,11 +168,14 @@
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="companyId != null">
-                company_id = #{companyId,jdbcType=VARCHAR},
-            </if>
             <if test="status != null">
-                status = #{status,jdbcType=INTEGER}
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="logType != null">
+                log_type = #{logType,jdbcType=VARCHAR},
+            </if>
+            <if test="externalId != null">
+                external_id = #{externalId,jdbcType=VARCHAR}
             </if>
         </set>
         WHERE log_id = #{logId,jdbcType=INTEGER}
@@ -194,8 +205,8 @@
             <if test="url != null">
                 AND url = #{url}
             </if>
-            <if test="customerId != null">
-                AND customer_id = #{customerId}
+            <if test="createUser != null">
+                AND create_user = #{createUser}
             </if>
             <if test="ip != null">
                 AND ip = #{ip}
@@ -218,11 +229,14 @@
             <if test="createTime != null">
                 AND create_time = #{createTime}
             </if>
-            <if test="companyId != null">
-                AND company_id = #{companyId}
-            </if>
             <if test="status != null">
                 AND status = #{status}
+            </if>
+            <if test="logType != null">
+                AND log_type = #{logType}
+            </if>
+            <if test="externalId != null">
+                AND external_id = #{externalId}
             </if>
         </where>
     </select>
@@ -235,8 +249,8 @@
             <if test="url != null">
                 AND url ${url}
             </if>
-            <if test="customerId != null">
-                AND customer_id ${customerId}
+            <if test="createUser != null">
+                AND create_user ${createUser}
             </if>
             <if test="ip != null">
                 AND ip ${ip}
@@ -259,11 +273,14 @@
             <if test="createTime != null">
                 AND create_time ${createTime}
             </if>
-            <if test="companyId != null">
-                AND company_id ${companyId}
-            </if>
             <if test="status != null">
                 AND status ${status}
+            </if>
+            <if test="logType != null">
+                AND log_type ${logType}
+            </if>
+            <if test="externalId != null">
+                AND external_id ${externalId}
             </if>
         </where>
             <if test="orderBy != null">
@@ -278,11 +295,11 @@
     </select>
 
     <insert id="batchInsert" keyProperty="logId" useGeneratedKeys="true">
-        INSERT INTO sys_action_log (url, customer_id, ip, function_name, start_time, end_time, res_json, req_json, create_time, company_id, status) values
+        INSERT INTO sys_action_log (url, create_user, ip, function_name, start_time, end_time, res_json, req_json, create_time, status, log_type, external_id) values
         <foreach collection="list" item="item" separator=",">
             (
             #{item.url,jdbcType=VARCHAR},
-            #{item.customerId,jdbcType=VARCHAR},
+            #{item.createUser,jdbcType=VARCHAR},
             #{item.ip,jdbcType=VARCHAR},
             #{item.functionName,jdbcType=VARCHAR},
             #{item.startTime,jdbcType=DATE},
@@ -290,8 +307,9 @@
             #{item.resJson,jdbcType=VARCHAR},
             #{item.reqJson,jdbcType=VARCHAR},
             #{item.createTime,jdbcType=TIMESTAMP},
-            #{item.companyId,jdbcType=VARCHAR},
-            #{item.status,jdbcType=INTEGER}
+            #{item.status,jdbcType=INTEGER},
+            #{item.logType,jdbcType=VARCHAR},
+            #{item.externalId,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>
@@ -303,8 +321,8 @@
                 <if test="item.url != null">
                     url = #{item.url,jdbcType=VARCHAR},
                 </if>
-                <if test="item.customerId != null">
-                    customer_id = #{item.customerId,jdbcType=VARCHAR},
+                <if test="item.createUser != null">
+                    create_user = #{item.createUser,jdbcType=VARCHAR},
                 </if>
                 <if test="item.ip != null">
                     ip = #{item.ip,jdbcType=VARCHAR},
@@ -327,11 +345,14 @@
                 <if test="item.createTime != null">
                     create_time = #{item.createTime,jdbcType=TIMESTAMP},
                 </if>
-                <if test="item.companyId != null">
-                    company_id = #{item.companyId,jdbcType=VARCHAR},
-                </if>
                 <if test="item.status != null">
-                    status = #{item.status,jdbcType=INTEGER}
+                    status = #{item.status,jdbcType=INTEGER},
+                </if>
+                <if test="item.logType != null">
+                    log_type = #{item.logType,jdbcType=VARCHAR},
+                </if>
+                <if test="item.externalId != null">
+                    external_id = #{item.externalId,jdbcType=VARCHAR}
                 </if>
             </set>
             WHERE log_id = #{item.logId,jdbcType=INTEGER}

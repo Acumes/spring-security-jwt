@@ -84,6 +84,11 @@ public final class ReturnCode {
      */
     public static final String INVALID_CAPTCHA = "30201";
 
+    /**
+     * 400 验证码錯誤
+     */
+    public static final String INVALID_CAPTCHA_ERROR = "30202";
+
     private ReturnCode() {
         throw new IllegalAccessError("Utility class");
     }

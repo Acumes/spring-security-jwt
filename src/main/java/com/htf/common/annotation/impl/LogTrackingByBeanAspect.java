@@ -2,6 +2,7 @@ package com.htf.common.annotation.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.htf.common.annotation.LogTrackingByBean;
+import com.htf.common.config.security.model.AuthUser;
 import com.htf.common.utils.DateUtils;
 import com.htf.po.SysActionLog;
 import com.htf.service.ISysActionLogService;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -21,6 +23,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,11 +66,15 @@ public class LogTrackingByBeanAspect {
                     Long time = System.currentTimeMillis();
                     // 非嵌套对象读取
                     SysActionLog log = new SysActionLog();
-//					log.setAccountId(CommonGetAccountUtil.getAccountInfo().getAccountId());
+
+                    AuthUser authUser = (AuthUser) SecurityContextHolder.getContext()
+                            .getAuthentication()
+                            .getPrincipal();
+                    if(authUser != null){
+                        log.setCreateUser(authUser.getId());
+                    }
 //					// 设置用户的操作名称
-//					log.setStartTime();
 //					// 设置注解配置的操作值
-//					log.setOperation(methodMapping.value()[0]);
                     Class<?> signatureClass = signature.getDeclaringType();
                     RequestMapping type = signatureClass.getAnnotation(RequestMapping.class);
                     // 设置当前注解对应的基础日志类型
@@ -90,8 +97,6 @@ public class LogTrackingByBeanAspect {
                         //添加容错  数据库时间不能为空
                         log.setStartTime(DateUtils.getNow());
                     }
-                    log.setCompanyId(String.valueOf(argMap.get("companyId")));
-                    log.setCustomerId(String.valueOf(argMap.get("customerId")));
                     log.setReqJson(argString);
                     log.setEndTime(DateUtils.getNow());
                     log.setCreateTime(DateUtils.getNow());
@@ -99,9 +104,8 @@ public class LogTrackingByBeanAspect {
                     log.setIp(request.getRemoteAddr());
                     String uri = request.getRequestURI();
                     log.setUrl(request.getRequestURL().toString());
-                    log.setFunctionName(uri.substring(1, uri.length()).replace("/","."));
+                    log.setFunctionName(uri);
                     if(Integer.valueOf(String.valueOf(resMap.get("statusCodeValue"))) == 200) {
-
                         log.setStatus(1);
                     }else {
                         log.setStatus(0);

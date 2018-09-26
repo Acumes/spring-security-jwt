@@ -1,5 +1,6 @@
 package com.htf.controller;
 
+import com.htf.common.annotation.LogTrackingByBean;
 import com.htf.common.annotation.PermissionTracking;
 import com.htf.common.config.redis.RedisRepository;
 import com.htf.common.config.security.AuthenticationTokenFilter;
@@ -149,6 +150,7 @@ public class UserController extends BaseController{
             }
     )
     @PermissionTracking(methodName = "sys:user:edit")
+    @LogTrackingByBean(value = UpdateUserRequest.class, methodName = "getName")
     public ResponseEntity<String> updateUser(@PathVariable String id,@RequestBody UpdateUserRequest request){
         userService.updateUser(id,request);
         return new ResponseEntity<String>("success", HttpStatus.OK);

@@ -74,8 +74,17 @@ public class AuthenticationController extends BaseController{
     @ApiOperation(value = "获取token")
     public Map<String, Object> createAuthenticationToken(
         @ApiParam(required = true, value = "用户名") @RequestParam("username") String username,
-        @ApiParam(required = true, value = "密码") @RequestParam("password") String password
+        @ApiParam(required = true, value = "密码") @RequestParam("password") String password,
+        @ApiParam(required = true, value = "验证码") @RequestParam("captchaCode") String captchaCode
     ) {
+
+        Map<String, Object> message = new HashMap<>();
+
+        boolean capthcha = sysCaptchaService.validate(captchaCode);
+        if(!capthcha){
+            message.put(Message.RETURN_FIELD_CODE, ReturnCode.INVALID_CAPTCHA_ERROR);
+            return message;
+        }
 
         //完成授权
         final Authentication authentication = authenticationManager.authenticate(
@@ -87,11 +96,12 @@ public class AuthenticationController extends BaseController{
         final String token = jwtTokenUtil.generateToken(userDetails); //生成Token
 
         Map<String, Object> tokenMap = new HashMap<>();
+
         tokenMap.put("access_token", token);
         tokenMap.put("expires_in", jwtTokenUtil.getExpiration());
         tokenMap.put("token_type", TokenUtil.TOKEN_TYPE_BEARER);
 
-        Map<String, Object> message = new HashMap<>();
+
         message.put(Message.RETURN_FIELD_CODE, ReturnCode.SUCCESS);
         message.put(Message.RETURN_FIELD_DATA, tokenMap);
 
