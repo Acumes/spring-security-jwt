@@ -26,19 +26,28 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The type Authentication controller.
+ *
  * @author acumes
  * @date 2018/8/4 14:13
  */
 @RestController
 @RequestMapping("/auth")
-@Api(tags = "权限管理",description = "权限API")
-public class AuthenticationController extends BaseController{
+@Api(tags = "权限管理", description = "权限API")
+public class AuthenticationController extends BaseController {
 
     /**
      * 权限管理
@@ -73,22 +82,22 @@ public class AuthenticationController extends BaseController{
     @PostMapping(value = "/token", produces = "application/json; charset=UTF-8")
     @ApiOperation(value = "获取token")
     public Map<String, Object> createAuthenticationToken(
-        @ApiParam(required = true, value = "用户名") @RequestParam("username") String username,
-        @ApiParam(required = true, value = "密码") @RequestParam("password") String password,
-        @ApiParam(required = true, value = "验证码") @RequestParam("captchaCode") String captchaCode
+            @ApiParam(required = true, value = "用户名") @RequestParam("username") String username,
+            @ApiParam(required = true, value = "密码") @RequestParam("password") String password,
+            @ApiParam(required = true, value = "验证码") @RequestParam("captchaCode") String captchaCode
     ) {
 
         Map<String, Object> message = new HashMap<>();
 
         boolean capthcha = sysCaptchaService.validate(captchaCode);
-        if(!capthcha){
+        if (!capthcha) {
             message.put(Message.RETURN_FIELD_CODE, ReturnCode.INVALID_CAPTCHA_ERROR);
             return message;
         }
 
         //完成授权
         final Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(username, password)
+                new UsernamePasswordAuthenticationToken(username, password)
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -117,13 +126,13 @@ public class AuthenticationController extends BaseController{
     @GetMapping(value = "/refresh", produces = "application/json; charset=UTF-8")
     @ApiOperation(value = "刷新token")
     @ApiImplicitParams(
-        {
-            @ApiImplicitParam(name = "Authorization", required = true, paramType = "header",
-                dataType = "string", value = "authorization header", defaultValue = "Bearer ")
-        }
+            {
+                    @ApiImplicitParam(name = "Authorization", required = true, paramType = "header",
+                            dataType = "string", value = "authorization header", defaultValue = "Bearer ")
+            }
     )
     public Map<String, Object> refreshAndGetAuthenticationToken(
-        HttpServletRequest request) {
+            HttpServletRequest request) {
 
         String tokenHeader = request.getHeader(AuthenticationTokenFilter.TOKEN_HEADER);
         String token = tokenHeader.split(" ")[1];
@@ -154,13 +163,13 @@ public class AuthenticationController extends BaseController{
     @DeleteMapping(value = "/token", produces = "application/json; charset=UTF-8")
     @ApiOperation(value = "清空token")
     @ApiImplicitParams(
-        {
-            @ApiImplicitParam(name = "Authorization", required = true, paramType = "header",
-                dataType = "string", value = "authorization header", defaultValue = "Bearer ")
-        }
+            {
+                    @ApiImplicitParam(name = "Authorization", required = true, paramType = "header",
+                            dataType = "string", value = "authorization header", defaultValue = "Bearer ")
+            }
     )
     public Map<String, Object> deleteAuthenticationToken(
-        HttpServletRequest request) {
+            HttpServletRequest request) {
 
         String tokenHeader = request.getHeader(AuthenticationTokenFilter.TOKEN_HEADER);
         String token = tokenHeader.split(" ")[1];
@@ -178,9 +187,20 @@ public class AuthenticationController extends BaseController{
      * 验证码
      */
     @GetMapping("captcha")
-    public void captcha(HttpServletResponse response, String uuid)throws ServletException, IOException {
+    public void captcha(HttpServletRequest request, HttpServletResponse response, String uuid) throws ServletException, IOException {
         response.setHeader("Cache-Control", "no-store, no-cache");
         response.setContentType("image/jpeg");
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        System.out.println(ip);
 
         //获取图片验证码
         BufferedImage image = null;
@@ -221,5 +241,4 @@ public class AuthenticationController extends BaseController{
         //用户被停用
         return makeErrorMessage(ReturnCode.DISABLED_USER, "User Disabled", ex.getMessage());
     }
-
 }

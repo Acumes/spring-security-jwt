@@ -48,7 +48,7 @@ public class ScheduleJobController extends BaseController{
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
-    public ResponseEntity<String> updateSchedule(@RequestBody ScheduleRequest request){
+    public ResponseEntity<String> updateSchedule(@RequestBody ScheduleRequest request) throws ServiceException {
         scheduleJobService.updateSchedule(request);
         return new ResponseEntity<String>("success", HttpStatus.OK);
     }
