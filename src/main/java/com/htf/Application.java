@@ -27,14 +27,6 @@ public class Application {
 
     }
 
-    public static Long test(int num){
-        Long l = 0l;
-        for(int i = 1 ; i <= num; i++){
-            l = (l+20) * i;
-        }
-        return l;
-    }
-
     public final static String DATE_FORMATE = "yyyy-MM-dd HH:mm:ss";
     @Bean
     public ObjectMapper objectMapper() {

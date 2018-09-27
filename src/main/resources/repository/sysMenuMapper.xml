@@ -35,7 +35,7 @@
     </select>
 
     <delete id="deleteRoleMenu">
-        DELETE FROM sys_menu WHERE menu_id=#{id}
+        DELETE FROM sys_role_menu WHERE menu_id=#{id}
     </delete>
 
 </mapper>

@@ -131,6 +131,7 @@ public class UserService implements IUserService {
         sysUser.setCreateDate(new Date());
         sysUserDao.insertSelective(sysUser);
         insertRole(request.getRole(),sysUser.getId());
+        request.setId(sysUser.getId());
     }
 
     @Override
@@ -148,10 +149,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void updateUser(String id, UpdateUserRequest request) {
+    public void updateUser(UpdateUserRequest request) {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(request,sysUser);
-        sysUser.setId(id);
+        sysUser.setId(request.getId());
         System.out.println(request.getIsEditPassword());
         sysUser.setPassword("true".equals(request.getIsEditPassword() ) ? new BCryptPasswordEncoder().encode(request.getPassword()) : null);
         sysUser.setUpdateDate(new Date());

@@ -34,5 +34,7 @@ public class SysActionLog implements Serializable {
     private String logType;
     /* 关联ID */
     private String externalId;
+    /* Http方法 */
+    private String httpMethod;
 
 }

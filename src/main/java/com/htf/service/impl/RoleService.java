@@ -60,6 +60,7 @@ public class RoleService implements IRoleService {
         sysRole.setEnabled("1");
         sysRole.setCreateUser(CommonUtils.getCurrentUser().getId());
         sysRoleDao.insertSelective(sysRole);
+        request.setId(sysRole.getId());
     }
 
     @Override

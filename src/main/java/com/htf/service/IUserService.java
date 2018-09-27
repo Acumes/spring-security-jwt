@@ -31,7 +31,7 @@ public interface IUserService {
 
     Boolean checkUser(CheckUserRequest request);
 
-    void updateUser(String id, UpdateUserRequest request);
+    void updateUser(UpdateUserRequest request);
 
     List<String> getPermissions(String id);
 }

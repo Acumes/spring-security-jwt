@@ -16,15 +16,16 @@
         <result column="status" jdbcType="INTEGER" property="status" />
         <result column="log_type" jdbcType="VARCHAR" property="logType" />
         <result column="external_id" jdbcType="VARCHAR" property="externalId" />
+        <result column="http_method" jdbcType="VARCHAR" property="httpMethod" />
     </resultMap>
 
     <sql id="Base_Column_List">
-        log_id, url, create_user, ip, function_name, start_time, end_time, res_json, req_json, create_time, status, log_type, external_id
+        log_id, url, create_user, ip, function_name, start_time, end_time, res_json, req_json, create_time, status, log_type, external_id, http_method
     </sql>
 
     <insert id="insert" keyProperty="logId" useGeneratedKeys="true">
 
-        INSERT INTO sys_action_log (url, create_user, ip, function_name, start_time, end_time, res_json, req_json, create_time, status, log_type, external_id) VALUES (#{url,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{functionName,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{resJson,jdbcType=VARCHAR}, #{reqJson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{logType,jdbcType=VARCHAR}, #{externalId,jdbcType=VARCHAR})
+        INSERT INTO sys_action_log (url, create_user, ip, function_name, start_time, end_time, res_json, req_json, create_time, status, log_type, external_id, http_method) VALUES (#{url,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{functionName,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{resJson,jdbcType=VARCHAR}, #{reqJson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{logType,jdbcType=VARCHAR}, #{externalId,jdbcType=VARCHAR}, #{httpMethod,jdbcType=VARCHAR})
     </insert>
 
     <insert id="insertSelective" keyProperty="logId" useGeneratedKeys="true">
@@ -66,6 +67,9 @@
             <if test="externalId != null">
                 external_id,
             </if>
+            <if test="httpMethod != null">
+                http_method,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="url != null">
@@ -104,6 +108,9 @@
             <if test="externalId != null">
                 #{externalId,jdbcType=VARCHAR},
             </if>
+            <if test="httpMethod != null">
+                #{httpMethod,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
 
@@ -133,7 +140,8 @@
             create_time = #{createTime,jdbcType=TIMESTAMP},
             status = #{status,jdbcType=INTEGER},
             log_type = #{logType,jdbcType=VARCHAR},
-            external_id = #{externalId,jdbcType=VARCHAR}
+            external_id = #{externalId,jdbcType=VARCHAR},
+            http_method = #{httpMethod,jdbcType=VARCHAR}
         </set>
         WHERE log_id = #{logId,jdbcType=INTEGER}
     </update>
@@ -175,7 +183,10 @@
                 log_type = #{logType,jdbcType=VARCHAR},
             </if>
             <if test="externalId != null">
-                external_id = #{externalId,jdbcType=VARCHAR}
+                external_id = #{externalId,jdbcType=VARCHAR},
+            </if>
+            <if test="httpMethod != null">
+                http_method = #{httpMethod,jdbcType=VARCHAR}
             </if>
         </set>
         WHERE log_id = #{logId,jdbcType=INTEGER}
@@ -238,6 +249,9 @@
             <if test="externalId != null">
                 AND external_id = #{externalId}
             </if>
+            <if test="httpMethod != null">
+                AND http_method = #{httpMethod}
+            </if>
         </where>
     </select>
 
@@ -282,6 +296,9 @@
             <if test="externalId != null">
                 AND external_id ${externalId}
             </if>
+            <if test="httpMethod != null">
+                AND http_method ${httpMethod}
+            </if>
         </where>
             <if test="orderBy != null">
             ORDER BY ${orderBy}
@@ -295,7 +312,7 @@
     </select>
 
     <insert id="batchInsert" keyProperty="logId" useGeneratedKeys="true">
-        INSERT INTO sys_action_log (url, create_user, ip, function_name, start_time, end_time, res_json, req_json, create_time, status, log_type, external_id) values
+        INSERT INTO sys_action_log (url, create_user, ip, function_name, start_time, end_time, res_json, req_json, create_time, status, log_type, external_id, http_method) values
         <foreach collection="list" item="item" separator=",">
             (
             #{item.url,jdbcType=VARCHAR},
@@ -309,7 +326,8 @@
             #{item.createTime,jdbcType=TIMESTAMP},
             #{item.status,jdbcType=INTEGER},
             #{item.logType,jdbcType=VARCHAR},
-            #{item.externalId,jdbcType=VARCHAR}
+            #{item.externalId,jdbcType=VARCHAR},
+            #{item.httpMethod,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>
@@ -352,7 +370,10 @@
                     log_type = #{item.logType,jdbcType=VARCHAR},
                 </if>
                 <if test="item.externalId != null">
-                    external_id = #{item.externalId,jdbcType=VARCHAR}
+                    external_id = #{item.externalId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.httpMethod != null">
+                    http_method = #{item.httpMethod,jdbcType=VARCHAR}
                 </if>
             </set>
             WHERE log_id = #{item.logId,jdbcType=INTEGER}

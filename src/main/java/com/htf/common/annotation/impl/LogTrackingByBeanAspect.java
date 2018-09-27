@@ -53,7 +53,6 @@ public class LogTrackingByBeanAspect {
             Signature signature = joinPoint.getSignature();
             Method method = ((MethodSignature) signature).getMethod();
             LogTrackingByBean operationLog = method.getAnnotation(LogTrackingByBean.class);
-            RequestMapping methodMapping = method.getAnnotation(RequestMapping.class);
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletRequest request = attributes.getRequest();
             if (!operationLog.enable()) {
@@ -73,16 +72,10 @@ public class LogTrackingByBeanAspect {
                     if(authUser != null){
                         log.setCreateUser(authUser.getId());
                     }
-//					// 设置用户的操作名称
-//					// 设置注解配置的操作值
-                    Class<?> signatureClass = signature.getDeclaringType();
-                    RequestMapping type = signatureClass.getAnnotation(RequestMapping.class);
-                    // 设置当前注解对应的基础日志类型
-//					log.setLogType(type.value()[0]);
-                    // 如果设置了methodName 为空，表示不从对象获取 ，直接根据指定index 获取关联外键，如果设置了
-                    // methodName那么即跟cla属性结合获取关联外键
-//					Method m = cls.getMethod(operationLog.methodName());
-
+                    log.setHttpMethod(request.getMethod());
+                    log.setIp(request.getRemoteAddr());
+                    log.setUrl(request.getRequestURL().toString());
+                    log.setFunctionName(joinPoint.getSignature().getName());
                     // 将请求参数转换成json.
                     String argString = JSON.toJSONString(arg);
                     String resString = JSON.toJSONString(ret);
@@ -97,6 +90,14 @@ public class LogTrackingByBeanAspect {
                         //添加容错  数据库时间不能为空
                         log.setStartTime(DateUtils.getNow());
                     }
+
+                    // 如果设置了methodName 为空，表示不从对象获取 ，直接根据指定index 获取关联外键，如果设置了
+                    // methodName那么即跟cla属性结合获取关联外键
+                    Method m = cls.getMethod(operationLog.methodName());
+                    if (null != m) {
+                        log.setExternalId(String.valueOf(m.invoke(arg)));
+                    }
+
                     log.setReqJson(argString);
                     log.setEndTime(DateUtils.getNow());
                     log.setCreateTime(DateUtils.getNow());
@@ -105,6 +106,7 @@ public class LogTrackingByBeanAspect {
                     String uri = request.getRequestURI();
                     log.setUrl(request.getRequestURL().toString());
                     log.setFunctionName(uri);
+                    log.setEndTime(new Date());
                     if(Integer.valueOf(String.valueOf(resMap.get("statusCodeValue"))) == 200) {
                         log.setStatus(1);
                     }else {

@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class UpdateUserRequest {
+    private String id;
     private String isEditPassword;
     private String loginName;
     private String password;

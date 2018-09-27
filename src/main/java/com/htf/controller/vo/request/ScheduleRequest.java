@@ -24,5 +24,4 @@ public class ScheduleRequest {
     private Byte status;
     /* 备注 */
     private String remark;
-    /* 创建时间 */
 }

@@ -1,5 +1,6 @@
 package com.htf.controller;
 
+import com.htf.common.annotation.LogTrackingByBean;
 import com.htf.common.exception.ServiceException;
 import com.htf.controller.vo.request.ScheduleListRequest;
 import com.htf.controller.vo.request.ScheduleRequest;
@@ -33,6 +34,7 @@ public class ScheduleJobController extends BaseController{
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @LogTrackingByBean(methodName = "getJobId", value = ScheduleRequest.class)
     public ResponseEntity<String> addSchedule(@RequestBody ScheduleRequest request) throws ServiceException {
         scheduleJobService.addSchedule(request);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -53,7 +55,7 @@ public class ScheduleJobController extends BaseController{
 
 
     @PostMapping("/getSchedules")
-    @ApiOperation(value = "获取用户列表")
+    @ApiOperation(value = "获取任务列表")
     @ApiImplicitParams(
             {
                     @ApiImplicitParam(name = "Authorization", required = true, paramType = "header",

@@ -10,6 +10,7 @@ import java.util.List;
  */
 @Data
 public class RoleAuthorizationRequest {
+    private String roleId;
     private List<String> checkIds;
     private List<String> noCheckIds;
 }

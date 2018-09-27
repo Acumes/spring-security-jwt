@@ -12,7 +12,7 @@ import com.htf.controller.vo.response.ScheduleListResult;
 public interface IScheduleJobService {
     void addSchedule(ScheduleRequest request) throws ServiceException;
 
-    void updateSchedule(ScheduleRequest request);
+    void updateSchedule(ScheduleRequest request) throws ServiceException;
 
     ScheduleListResult getSchedules(ScheduleListRequest request);
 }

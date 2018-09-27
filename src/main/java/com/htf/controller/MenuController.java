@@ -1,5 +1,7 @@
 package com.htf.controller;
 
+import com.htf.common.annotation.LogTrackingByBean;
+import com.htf.common.annotation.LogTrackingByString;
 import com.htf.common.annotation.PermissionTracking;
 import com.htf.controller.vo.request.AddMenuRequest;
 import com.htf.controller.vo.request.MenuTreeRequest;
@@ -70,6 +72,7 @@ public class MenuController extends BaseController{
             }
     )
     @PermissionTracking(methodName = "sys:menu:delete")
+    @LogTrackingByString(value = 0)
     public ResponseEntity<String> delMenu(@PathVariable String id){
         menuService.delMenu(id);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -84,6 +87,7 @@ public class MenuController extends BaseController{
             }
     )
     @PermissionTracking(methodName = "sys:menu:edit")
+    @LogTrackingByBean(methodName = "getId", value = AddMenuRequest.class)
     public ResponseEntity<String> updateMenu(@RequestBody AddMenuRequest request){
         menuService.updateMenu(request);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -97,8 +101,10 @@ public class MenuController extends BaseController{
             }
     )
     @PermissionTracking(methodName = "sys:menu:add")
+    @LogTrackingByBean(value = AddMenuRequest.class, methodName = "getId")
     public ResponseEntity<String> addMenu(@RequestBody AddMenuRequest request){
         String id = menuService.addMenu(request);
+        request.setId(id);
         return new ResponseEntity<String>(id, HttpStatus.OK);
     }
 

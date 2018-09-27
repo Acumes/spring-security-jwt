@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class AddUserRequest {
+    private String id;
     private String loginName;
     private String password;
     private String name;

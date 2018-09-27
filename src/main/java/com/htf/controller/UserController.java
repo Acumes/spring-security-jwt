@@ -1,13 +1,11 @@
 package com.htf.controller;
 
 import com.htf.common.annotation.LogTrackingByBean;
+import com.htf.common.annotation.LogTrackingByString;
 import com.htf.common.annotation.PermissionTracking;
 import com.htf.common.config.redis.RedisRepository;
 import com.htf.common.config.security.AuthenticationTokenFilter;
-import com.htf.controller.vo.request.AddUserRequest;
-import com.htf.controller.vo.request.CheckUserRequest;
-import com.htf.controller.vo.request.UpdateUserRequest;
-import com.htf.controller.vo.request.UserRequest;
+import com.htf.controller.vo.request.*;
 import com.htf.controller.vo.response.UserListResult;
 import com.htf.controller.vo.response.UserResponse;
 import com.htf.service.IUserService;
@@ -95,6 +93,7 @@ public class UserController extends BaseController{
             }
     )
     @PermissionTracking(methodName = "sys:user:delete")
+    @LogTrackingByString(value = 0)
     public ResponseEntity<String> delUser(@PathVariable String id){
         userService.delUser(id);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -109,6 +108,7 @@ public class UserController extends BaseController{
             }
     )
     @PermissionTracking(methodName = "sys:user:delete")
+    @LogTrackingByString(value = 0)
     public ResponseEntity<String> batchDelUser(@RequestParam String ids){
         userService.batchDelUser(ids);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -123,6 +123,7 @@ public class UserController extends BaseController{
             }
     )
     @PermissionTracking(methodName = "sys:user:add")
+    @LogTrackingByBean(methodName = "getId", value = AddUserRequest.class)
     public ResponseEntity<String> addUser(@RequestBody AddUserRequest request){
         userService.addUser(request);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -141,7 +142,7 @@ public class UserController extends BaseController{
         return new ResponseEntity<Boolean>(b, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("")
     @ApiOperation(value = "修改用户")
     @ApiImplicitParams(
             {
@@ -150,9 +151,9 @@ public class UserController extends BaseController{
             }
     )
     @PermissionTracking(methodName = "sys:user:edit")
-    @LogTrackingByBean(value = UpdateUserRequest.class, methodName = "getName")
-    public ResponseEntity<String> updateUser(@PathVariable String id,@RequestBody UpdateUserRequest request){
-        userService.updateUser(id,request);
+    @LogTrackingByBean(value = UpdateUserRequest.class, methodName = "getId")
+    public ResponseEntity<String> updateUser(@RequestBody UpdateUserRequest request){
+        userService.updateUser(request);
         return new ResponseEntity<String>("success", HttpStatus.OK);
     }
 

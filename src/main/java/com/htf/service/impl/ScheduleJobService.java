@@ -66,13 +66,16 @@ public class ScheduleJobService implements IScheduleJobService {
         BeanUtils.copyProperties(request,scheduleJob);
         scheduleJob.setStatus(0);
         scheduleJobDao.insert(scheduleJob);
-
+        request.setJobId(scheduleJob.getJobId());
         ScheduleUtils.createScheduleJob(scheduler, scheduleJob);
     }
 
     @Override
-    public void updateSchedule(ScheduleRequest request) {
-
+    public void updateSchedule(ScheduleRequest request) throws ServiceException {
+        ScheduleJob scheduleJob = new ScheduleJob();
+        BeanUtils.copyProperties(request,scheduleJob);
+        scheduleJobDao.updateByPrimaryKey(scheduleJob);
+        ScheduleUtils.updateScheduleJob(scheduler, scheduleJob);
     }
 
     @Override

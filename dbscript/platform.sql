@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2018-09-25 21:33:37
+Date: 2018-09-27 21:05:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -196,7 +196,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'ZO07CBI51EA4Y1A1537868383640', '1537882416371', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'ZO07CBI51EA4Y1A1538035997792', '1538053510849', '15000');
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -284,7 +284,7 @@ CREATE TABLE `qrtz_triggers` (
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler', 'TASK_6', 'DEFAULT', 'TASK_6', 'DEFAULT', null, '1537884600000', '1537881030000', '5', 'WAITING', 'CRON', '1537408274000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720016636F6D2E6874662E706F2E5363686564756C654A6F62932F4DB965EB1F130200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B78707400087461736B4265616E70740015302C3330203130202A203F202A204D4F4E2D4652497372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B020000787000000000000000067400047465737474000474657374740000737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0011000000007800);
+INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler', 'TASK_6', 'DEFAULT', 'TASK_6', 'DEFAULT', null, '1538053800000', '1538050230000', '5', 'WAITING', 'CRON', '1537408274000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720016636F6D2E6874662E706F2E5363686564756C654A6F62932F4DB965EB1F130200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B78707400087461736B4265616E70740015302C3330203130202A203F202A204D4F4E2D4652497372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B020000787000000000000000067400047465737474000474657374740000737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0011000000007800);
 
 -- ----------------------------
 -- Table structure for schedule_job
@@ -323,7 +323,7 @@ CREATE TABLE `schedule_job_log` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`log_id`),
   KEY `job_id` (`job_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=724 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+) ENGINE=InnoDB AUTO_INCREMENT=816 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
 
 -- ----------------------------
 -- Records of schedule_job_log
@@ -1006,6 +1006,98 @@ INSERT INTO `schedule_job_log` VALUES ('720', '6', 'taskBean', 'test', 'test', '
 INSERT INTO `schedule_job_log` VALUES ('721', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-25 20:10:30');
 INSERT INTO `schedule_job_log` VALUES ('722', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-25 21:10:00');
 INSERT INTO `schedule_job_log` VALUES ('723', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-25 21:10:30');
+INSERT INTO `schedule_job_log` VALUES ('724', '6', 'taskBean', 'test', 'test', '0', null, '1005', '2018-09-25 22:10:00');
+INSERT INTO `schedule_job_log` VALUES ('725', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-25 22:10:30');
+INSERT INTO `schedule_job_log` VALUES ('726', '6', 'taskBean', 'test', 'test', '0', null, '1005', '2018-09-25 23:10:00');
+INSERT INTO `schedule_job_log` VALUES ('727', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-25 23:10:30');
+INSERT INTO `schedule_job_log` VALUES ('728', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-26 00:10:00');
+INSERT INTO `schedule_job_log` VALUES ('729', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 00:10:30');
+INSERT INTO `schedule_job_log` VALUES ('730', '6', 'taskBean', 'test', 'test', '0', null, '1018', '2018-09-26 01:10:00');
+INSERT INTO `schedule_job_log` VALUES ('731', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-26 01:10:30');
+INSERT INTO `schedule_job_log` VALUES ('732', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 02:10:00');
+INSERT INTO `schedule_job_log` VALUES ('733', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 02:10:30');
+INSERT INTO `schedule_job_log` VALUES ('734', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 03:10:00');
+INSERT INTO `schedule_job_log` VALUES ('735', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-26 03:10:30');
+INSERT INTO `schedule_job_log` VALUES ('736', '6', 'taskBean', 'test', 'test', '0', null, '1005', '2018-09-26 04:10:00');
+INSERT INTO `schedule_job_log` VALUES ('737', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-26 04:10:30');
+INSERT INTO `schedule_job_log` VALUES ('738', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 05:10:00');
+INSERT INTO `schedule_job_log` VALUES ('739', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 05:10:30');
+INSERT INTO `schedule_job_log` VALUES ('740', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 06:10:00');
+INSERT INTO `schedule_job_log` VALUES ('741', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 06:10:30');
+INSERT INTO `schedule_job_log` VALUES ('742', '6', 'taskBean', 'test', 'test', '0', null, '1004', '2018-09-26 07:10:00');
+INSERT INTO `schedule_job_log` VALUES ('743', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-26 07:10:30');
+INSERT INTO `schedule_job_log` VALUES ('744', '6', 'taskBean', 'test', 'test', '0', null, '1027', '2018-09-26 08:10:00');
+INSERT INTO `schedule_job_log` VALUES ('745', '6', 'taskBean', 'test', 'test', '0', null, '1012', '2018-09-26 08:10:30');
+INSERT INTO `schedule_job_log` VALUES ('746', '6', 'taskBean', 'test', 'test', '0', null, '1914', '2018-09-26 09:10:01');
+INSERT INTO `schedule_job_log` VALUES ('747', '6', 'taskBean', 'test', 'test', '0', null, '1076', '2018-09-26 09:10:30');
+INSERT INTO `schedule_job_log` VALUES ('748', '6', 'taskBean', 'test', 'test', '0', null, '1228', '2018-09-26 10:10:02');
+INSERT INTO `schedule_job_log` VALUES ('749', '6', 'taskBean', 'test', 'test', '0', null, '1041', '2018-09-26 10:10:30');
+INSERT INTO `schedule_job_log` VALUES ('750', '6', 'taskBean', 'test', 'test', '0', null, '1060', '2018-09-26 12:10:00');
+INSERT INTO `schedule_job_log` VALUES ('751', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 12:10:30');
+INSERT INTO `schedule_job_log` VALUES ('752', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-26 13:10:00');
+INSERT INTO `schedule_job_log` VALUES ('753', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-26 13:10:30');
+INSERT INTO `schedule_job_log` VALUES ('754', '6', 'taskBean', 'test', 'test', '0', null, '1045', '2018-09-26 14:10:00');
+INSERT INTO `schedule_job_log` VALUES ('755', '6', 'taskBean', 'test', 'test', '0', null, '1013', '2018-09-26 14:10:30');
+INSERT INTO `schedule_job_log` VALUES ('756', '6', 'taskBean', 'test', 'test', '0', null, '1170', '2018-09-26 15:10:00');
+INSERT INTO `schedule_job_log` VALUES ('757', '6', 'taskBean', 'test', 'test', '0', null, '1037', '2018-09-26 15:10:30');
+INSERT INTO `schedule_job_log` VALUES ('758', '6', 'taskBean', 'test', 'test', '0', null, '1214', '2018-09-26 16:10:00');
+INSERT INTO `schedule_job_log` VALUES ('759', '6', 'taskBean', 'test', 'test', '0', null, '1007', '2018-09-26 16:10:30');
+INSERT INTO `schedule_job_log` VALUES ('760', '6', 'taskBean', 'test', 'test', '0', null, '1003', '2018-09-26 17:10:00');
+INSERT INTO `schedule_job_log` VALUES ('761', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 17:10:30');
+INSERT INTO `schedule_job_log` VALUES ('762', '6', 'taskBean', 'test', 'test', '0', null, '1003', '2018-09-26 18:10:00');
+INSERT INTO `schedule_job_log` VALUES ('763', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 18:10:30');
+INSERT INTO `schedule_job_log` VALUES ('764', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 19:10:00');
+INSERT INTO `schedule_job_log` VALUES ('765', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 19:10:30');
+INSERT INTO `schedule_job_log` VALUES ('766', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-26 20:10:00');
+INSERT INTO `schedule_job_log` VALUES ('767', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 20:10:30');
+INSERT INTO `schedule_job_log` VALUES ('768', '6', 'taskBean', 'test', 'test', '0', null, '1069', '2018-09-26 21:10:00');
+INSERT INTO `schedule_job_log` VALUES ('769', '6', 'taskBean', 'test', 'test', '0', null, '1000', '2018-09-26 21:10:30');
+INSERT INTO `schedule_job_log` VALUES ('770', '6', 'taskBean', 'test', 'test', '0', null, '1042', '2018-09-26 22:10:00');
+INSERT INTO `schedule_job_log` VALUES ('771', '6', 'taskBean', 'test', 'test', '0', null, '1026', '2018-09-26 22:10:30');
+INSERT INTO `schedule_job_log` VALUES ('772', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 23:10:00');
+INSERT INTO `schedule_job_log` VALUES ('773', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-26 23:10:30');
+INSERT INTO `schedule_job_log` VALUES ('774', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-27 00:10:00');
+INSERT INTO `schedule_job_log` VALUES ('775', '6', 'taskBean', 'test', 'test', '0', null, '1010', '2018-09-27 00:10:30');
+INSERT INTO `schedule_job_log` VALUES ('776', '6', 'taskBean', 'test', 'test', '0', null, '1037', '2018-09-27 01:10:00');
+INSERT INTO `schedule_job_log` VALUES ('777', '6', 'taskBean', 'test', 'test', '0', null, '1011', '2018-09-27 01:10:30');
+INSERT INTO `schedule_job_log` VALUES ('778', '6', 'taskBean', 'test', 'test', '0', null, '1025', '2018-09-27 02:10:00');
+INSERT INTO `schedule_job_log` VALUES ('779', '6', 'taskBean', 'test', 'test', '0', null, '1023', '2018-09-27 02:10:30');
+INSERT INTO `schedule_job_log` VALUES ('780', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-27 03:10:00');
+INSERT INTO `schedule_job_log` VALUES ('781', '6', 'taskBean', 'test', 'test', '0', null, '1014', '2018-09-27 03:10:30');
+INSERT INTO `schedule_job_log` VALUES ('782', '6', 'taskBean', 'test', 'test', '0', null, '1025', '2018-09-27 04:10:00');
+INSERT INTO `schedule_job_log` VALUES ('783', '6', 'taskBean', 'test', 'test', '0', null, '1020', '2018-09-27 04:10:30');
+INSERT INTO `schedule_job_log` VALUES ('784', '6', 'taskBean', 'test', 'test', '0', null, '1041', '2018-09-27 05:10:00');
+INSERT INTO `schedule_job_log` VALUES ('785', '6', 'taskBean', 'test', 'test', '0', null, '1022', '2018-09-27 05:10:30');
+INSERT INTO `schedule_job_log` VALUES ('786', '6', 'taskBean', 'test', 'test', '0', null, '1020', '2018-09-27 06:10:00');
+INSERT INTO `schedule_job_log` VALUES ('787', '6', 'taskBean', 'test', 'test', '0', null, '1027', '2018-09-27 06:10:30');
+INSERT INTO `schedule_job_log` VALUES ('788', '6', 'taskBean', 'test', 'test', '0', null, '1037', '2018-09-27 07:10:00');
+INSERT INTO `schedule_job_log` VALUES ('789', '6', 'taskBean', 'test', 'test', '0', null, '1016', '2018-09-27 07:10:30');
+INSERT INTO `schedule_job_log` VALUES ('790', '6', 'taskBean', 'test', 'test', '0', null, '1115', '2018-09-27 08:10:00');
+INSERT INTO `schedule_job_log` VALUES ('791', '6', 'taskBean', 'test', 'test', '0', null, '1053', '2018-09-27 08:10:30');
+INSERT INTO `schedule_job_log` VALUES ('792', '6', 'taskBean', 'test', 'test', '0', null, '1029', '2018-09-27 09:10:00');
+INSERT INTO `schedule_job_log` VALUES ('793', '6', 'taskBean', 'test', 'test', '0', null, '1020', '2018-09-27 09:10:30');
+INSERT INTO `schedule_job_log` VALUES ('794', '6', 'taskBean', 'test', 'test', '0', null, '3627', '2018-09-27 10:10:06');
+INSERT INTO `schedule_job_log` VALUES ('795', '6', 'taskBean', 'test', 'test', '0', null, '1238', '2018-09-27 10:10:30');
+INSERT INTO `schedule_job_log` VALUES ('796', '6', 'taskBean', 'test', 'test', '0', null, '1126', '2018-09-27 11:10:00');
+INSERT INTO `schedule_job_log` VALUES ('797', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-27 11:10:30');
+INSERT INTO `schedule_job_log` VALUES ('798', '6', 'taskBean', 'test', 'test', '0', null, '2680', '2018-09-27 12:10:01');
+INSERT INTO `schedule_job_log` VALUES ('799', '6', 'taskBean', 'test', 'test', '0', null, '1111', '2018-09-27 12:10:30');
+INSERT INTO `schedule_job_log` VALUES ('800', '6', 'taskBean', 'test', 'test', '0', null, '1243', '2018-09-27 13:10:00');
+INSERT INTO `schedule_job_log` VALUES ('801', '6', 'taskBean', 'test', 'test', '0', null, '1085', '2018-09-27 13:10:30');
+INSERT INTO `schedule_job_log` VALUES ('802', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-27 14:10:00');
+INSERT INTO `schedule_job_log` VALUES ('803', '6', 'taskBean', 'test', 'test', '0', null, '1000', '2018-09-27 14:10:30');
+INSERT INTO `schedule_job_log` VALUES ('804', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-27 15:10:00');
+INSERT INTO `schedule_job_log` VALUES ('805', '6', 'taskBean', 'test', 'test', '0', null, '1000', '2018-09-27 15:10:30');
+INSERT INTO `schedule_job_log` VALUES ('806', '6', 'taskBean', 'test', 'test', '0', null, '1005', '2018-09-27 16:10:00');
+INSERT INTO `schedule_job_log` VALUES ('807', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-27 16:10:30');
+INSERT INTO `schedule_job_log` VALUES ('808', '6', 'taskBean', 'test', 'test', '0', null, '1019', '2018-09-27 17:10:00');
+INSERT INTO `schedule_job_log` VALUES ('809', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-27 17:10:30');
+INSERT INTO `schedule_job_log` VALUES ('810', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-27 18:10:00');
+INSERT INTO `schedule_job_log` VALUES ('811', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-27 18:10:30');
+INSERT INTO `schedule_job_log` VALUES ('812', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-27 19:10:00');
+INSERT INTO `schedule_job_log` VALUES ('813', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-27 19:10:30');
+INSERT INTO `schedule_job_log` VALUES ('814', '6', 'taskBean', 'test', 'test', '0', null, '1002', '2018-09-27 20:10:00');
+INSERT INTO `schedule_job_log` VALUES ('815', '6', 'taskBean', 'test', 'test', '0', null, '1001', '2018-09-27 20:10:30');
 
 -- ----------------------------
 -- Table structure for sys_action_log
@@ -1014,22 +1106,30 @@ DROP TABLE IF EXISTS `sys_action_log`;
 CREATE TABLE `sys_action_log` (
   `log_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '日志编号',
   `url` varchar(256) NOT NULL COMMENT '请求地址',
-  `customer_id` varchar(45) DEFAULT NULL COMMENT '客户编码',
+  `create_user` varchar(45) NOT NULL COMMENT '创建用户',
   `ip` varchar(68) NOT NULL COMMENT 'ip地址',
   `function_name` varchar(256) NOT NULL COMMENT '接口名',
-  `start_time` date DEFAULT NULL COMMENT '请求时间',
-  `end_time` date DEFAULT NULL COMMENT '响应时间',
+  `start_time` datetime DEFAULT NULL COMMENT '请求时间',
+  `end_time` datetime DEFAULT NULL COMMENT '响应时间',
   `res_json` text COMMENT '响应内容',
   `req_json` text COMMENT '请求内容',
   `create_time` datetime NOT NULL COMMENT '日志保存时间',
-  `company_id` varchar(6) DEFAULT NULL COMMENT '公司编码',
   `status` int(2) DEFAULT NULL COMMENT '状态 ，1：成功，0：失败',
+  `log_type` varchar(255) DEFAULT NULL COMMENT '操作类型',
+  `external_id` varchar(255) DEFAULT NULL COMMENT '关联ID',
+  `http_method` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='请求日志';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='请求日志';
 
 -- ----------------------------
 -- Records of sys_action_log
 -- ----------------------------
+INSERT INTO `sys_action_log` VALUES ('11', 'http://192.168.3.225:8082/users/add', '1dc8f600508640688f150c6e04d5c324', '192.168.3.225', '/users/add', '2018-09-27 00:00:00', '2018-09-27 00:00:00', '{\"body\":\"success\",\"headers\":{},\"statusCode\":\"OK\",\"statusCodeValue\":200}', '{\"email\":\"dadas\",\"id\":\"\",\"loginName\":\"dadas\",\"mobile\":\"dadas\",\"name\":\"dadas\",\"password\":\"dadas\",\"phone\":\"dadas\",\"remarks\":\"dadas\",\"role\":[\"5f928dc1266643e8bf7189e7defc6bed\",\"ffa8325fbe0c4119a497cac2d71d1ab8\"]}', '2018-09-27 16:11:55', '1', null, '', 'POST');
+INSERT INTO `sys_action_log` VALUES ('12', 'http://192.168.3.225:8082/users/1c87de0f5356456da9025d6047864307', '1dc8f600508640688f150c6e04d5c324', '192.168.3.225', 'delUser', null, '2018-09-27 00:00:00', '{\"body\":\"success\",\"headers\":{},\"statusCode\":\"OK\",\"statusCodeValue\":200}', '1c87de0f5356456da9025d6047864307', '2018-09-27 16:13:41', '1', null, '1c87de0f5356456da9025d6047864307', 'DELETE');
+INSERT INTO `sys_action_log` VALUES ('13', 'http://192.168.3.225:8082/users/add', '1dc8f600508640688f150c6e04d5c324', '192.168.3.225', '/users/add', '2018-09-27 00:00:00', '2018-09-27 00:00:00', '{\"body\":\"success\",\"headers\":{},\"statusCode\":\"OK\",\"statusCodeValue\":200}', '{\"email\":\"dddddddd\",\"id\":\"369cef28ae0d4298ba93d6d2923fd6ab\",\"loginName\":\"dddddddd\",\"mobile\":\"dddddddd\",\"name\":\"dddddddd\",\"password\":\"dddddddd\",\"phone\":\"dddddddd\",\"remarks\":\"\",\"role\":[]}', '2018-09-27 16:13:57', '1', null, '369cef28ae0d4298ba93d6d2923fd6ab', 'POST');
+INSERT INTO `sys_action_log` VALUES ('14', 'http://192.168.3.225:8082/users', '1dc8f600508640688f150c6e04d5c324', '192.168.3.225', '/users', '2018-09-27 00:00:00', '2018-09-27 00:00:00', '{\"body\":\"success\",\"headers\":{},\"statusCode\":\"OK\",\"statusCodeValue\":200}', '{\"email\":\"dddddddd1\",\"id\":\"369cef28ae0d4298ba93d6d2923fd6ab\",\"isEditPassword\":\"false\",\"loginName\":\"dddddddd1\",\"mobile\":\"dddddddd1\",\"name\":\"dddddddd1\",\"phone\":\"dddddddd1\",\"role\":[]}', '2018-09-27 16:14:16', '1', null, '369cef28ae0d4298ba93d6d2923fd6ab', 'PUT');
+INSERT INTO `sys_action_log` VALUES ('15', 'http://192.168.3.225:8082/roles/authorization/5f928dc1266643e8bf7189e7defc6bed', '1dc8f600508640688f150c6e04d5c324', '192.168.3.225', '/roles/authorization/5f928dc1266643e8bf7189e7defc6bed', '2018-09-27 00:00:00', '2018-09-27 00:00:00', '{\"body\":\"success\",\"headers\":{},\"statusCode\":\"OK\",\"statusCodeValue\":200}', '{\"checkIds\":[\"533c3d178b934743904c8fe4ba5113a4\",\"6fc2b92c910244e19ed7510f0a657888\"],\"noCheckIds\":[\"92\",\"923\"],\"roleId\":\"5f928dc1266643e8bf7189e7defc6bed\"}', '2018-09-27 16:15:12', '1', null, '5f928dc1266643e8bf7189e7defc6bed', 'POST');
+INSERT INTO `sys_action_log` VALUES ('16', 'http://192.168.3.225:8082/roles/', '1dc8f600508640688f150c6e04d5c324', '192.168.3.225', '/roles/', '2018-09-27 00:00:00', '2018-09-27 00:00:00', '{\"body\":\"success\",\"headers\":{},\"statusCode\":\"OK\",\"statusCodeValue\":200}', '{}', '2018-09-27 16:34:58', '1', null, 'null', 'PUT');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1062,7 +1162,7 @@ INSERT INTO `sys_menu` VALUES ('39fdf6f013a1430d87619137e9b1d187', 'f2d7b9ff4bef
 INSERT INTO `sys_menu` VALUES ('533c3d178b934743904c8fe4ba5113a4', '923', '新增', '1', null, 'el-icon-plus', '1', 'sys:user:add', '用户新增', '2018-09-12 14:29:22', '1dc8f600508640688f150c6e04d5c324', null, null);
 INSERT INTO `sys_menu` VALUES ('5f0a6fd67773402ebcc925326f15acbd', '924', '删除', '42', null, 'el-icon-delete', '1', 'sys:role:delete', '角色删除', '2018-09-13 14:49:39', '1dc8f600508640688f150c6e04d5c324', null, null);
 INSERT INTO `sys_menu` VALUES ('6de499e34a934891aa878f8e7228a6cf', '921', '新增', '41', null, 'el-icon-plus', '1', 'sys:menu:add', '菜单新增', '2018-09-13 14:46:34', '1dc8f600508640688f150c6e04d5c324', '2018-09-13 14:48:56', '1dc8f600508640688f150c6e04d5c324');
-INSERT INTO `sys_menu` VALUES ('6fc2b92c910244e19ed7510f0a657888', '923', '删除', '2', null, 'el-icon-delete', '1', 'sys:user:delete', '用户删除', '2018-09-12 14:22:01', '1dc8f600508640688f150c6e04d5c324', null, null);
+INSERT INTO `sys_menu` VALUES ('6fc2b92c910244e19ed7510f0a657888', '923', '删除', '2', null, 'el-icon-delete', '1', 'sys:user:delete', '用户删除1', '2018-09-12 14:22:01', '1dc8f600508640688f150c6e04d5c324', '2018-09-27 13:58:58', '1dc8f600508640688f150c6e04d5c324');
 INSERT INTO `sys_menu` VALUES ('71', '', '首页', '1', 'app.dashboard', 'el-icon-ali-dashboard', '1', 'sys:dashboard', '', '2015-10-20 08:00:00', null, '2016-12-26 11:13:42', null);
 INSERT INTO `sys_menu` VALUES ('92', '', '系统管理', '60', '', 'el-icon-ali-dataCenter', '1', 'sys:datacenter', '', '2015-10-20 08:00:00', null, '2018-09-17 17:37:01', '1dc8f600508640688f150c6e04d5c324');
 INSERT INTO `sys_menu` VALUES ('921', '92', '菜单管理', '30', 'app.sys.menu.list', 'el-icon-ali-menu', '1', 'sys:menu', '', '2015-10-20 08:00:00', null, '2015-10-20 08:00:00', null);
@@ -1146,7 +1246,7 @@ INSERT INTO `sys_role_menu` VALUES ('2', '923', '1');
 INSERT INTO `sys_role_menu` VALUES ('2', '9231', '1');
 INSERT INTO `sys_role_menu` VALUES ('2', '9232', '1');
 INSERT INTO `sys_role_menu` VALUES ('5f928dc1266643e8bf7189e7defc6bed', '533c3d178b934743904c8fe4ba5113a4', '1');
-INSERT INTO `sys_role_menu` VALUES ('5f928dc1266643e8bf7189e7defc6bed', '7366c24534224c23ae53dba2ce57bc2f', '1');
+INSERT INTO `sys_role_menu` VALUES ('5f928dc1266643e8bf7189e7defc6bed', '6fc2b92c910244e19ed7510f0a657888', '1');
 INSERT INTO `sys_role_menu` VALUES ('5f928dc1266643e8bf7189e7defc6bed', '92', '0');
 INSERT INTO `sys_role_menu` VALUES ('5f928dc1266643e8bf7189e7defc6bed', '923', '0');
 INSERT INTO `sys_role_menu` VALUES ('ffa8325fbe0c4119a497cac2d71d1ab8', '533c3d178b934743904c8fe4ba5113a4', '1');
@@ -1181,6 +1281,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1dc8f600508640688f150c6e04d5c324', 'admin', '$2a$08$onHA58Qvc93qOZZNUTev4e89YRuRtfxrOM9F35WgLEwY84eGffy9W', 'admin', '295277302@qq.com', '124123123', '188299923', '1', '12312', '2018-08-08 15:13:56', '2018-09-17 14:55:21', null);
 INSERT INTO `sys_user` VALUES ('1dc8f600508640688f150c6e04d5c953', 'admin1', '$2a$10$ZD6xxT.zFlxgzJxz6LCdQOOMES0v0eOZEJk2LoKKFITx.ipbB8rwa', '123123', '12312', '21312', '3123', '1', '3123131', '2018-08-08 15:13:53', null, '0');
+INSERT INTO `sys_user` VALUES ('369cef28ae0d4298ba93d6d2923fd6ab', 'dddddddd1', '$2a$10$h0VPNLbqwDkI6WMG6jZcG.T9XG27XxwhG7eqVltVdH6fmVXSB3fNC', 'dddddddd1', 'dddddddd1', 'dddddddd1', 'dddddddd1', '1', '', '2018-09-27 16:13:57', '2018-09-27 16:14:16', '0');
 INSERT INTO `sys_user` VALUES ('3fcc7ec0afb24b2eb66e597cbe0abeb1', 'ddddsad', '$2a$10$1u6ZJntQRxq/GcP8pCuDUuAnnJ9Wf.nigIDh/1mDW3Ns7qSKlRpBC', 'ddddsad', 'ddddsad', 'ddddsad', 'ddddsad', '1', 'ddddsad', '2018-08-08 16:43:38', null, '0');
 INSERT INTO `sys_user` VALUES ('4005c5b089dd4205a78343e6bf348cc6', 'admin8', '$2a$10$Kv53e8Ebsc/Pd5n7ASFKQegKI766R5CfCjeGjhCa8carsybJy2u96', 'admin8', 'admin8', 'admin8', 'admin8', '1', 'admin8', '2018-08-08 15:13:59', '2018-09-17 15:06:37', '0');
 INSERT INTO `sys_user` VALUES ('53005f8d6835436ba4e5d6bda080d00d', 'admin6', '$2a$10$4onsys0ubgkkAYcuAK00lOHrLMDpV1XMHb8X/Pus/U3Ju8ba52Vye', 'admin6', 'admin6', 'admin6', 'admin6', '1', 'admin6', '2018-08-08 15:14:01', null, '0');
@@ -1190,7 +1291,7 @@ INSERT INTO `sys_user` VALUES ('60c06c12f7114857a7865d4cc839d66d', 'admin9', '$2
 INSERT INTO `sys_user` VALUES ('bf2368598dc742278bc990af4d1e69d9', 'test1234', '$2a$10$rKGrDs55yNW9C8IrriEitOicdMl35tkLKuYVO01XOCyH0QY8SBk9i', 'test1234', 'test1234', 'test1234', 'test1234', '1', 'test1234', '2018-09-17 15:10:12', '2018-09-25 15:53:53', '0');
 INSERT INTO `sys_user` VALUES ('c0fca810ad7e47b7821de90ef12c2412', 'admin3', '$2a$10$EU6K7eIMU4HLXZQjjR7TSONp.0gcTIaMgGgzqR1XA8dq1MoC/LhpS', 'admin3', 'admin3', 'admin3', 'admin3', '1', 'admin3', '2018-08-08 15:14:17', null, '0');
 INSERT INTO `sys_user` VALUES ('dac7b9f4ccfb412ab099314e38f99e58', 'admin7', '$2a$10$hqGfO0wynYgxJ39QyMIc3..qBkk12bbVFWATpO4oY1L4N/yG0/mhu', 'admin7', 'admin7', 'admin7', 'admin7', '1', 'admin7', '2018-08-08 15:14:19', null, '0');
-INSERT INTO `sys_user` VALUES ('f8c2b552542a4879bd45c641246bd408', 'asda', '$2a$10$t2D4XrSuE75zqCDIJ9n/v.poeDHIlap/5plc1y9gxC2aCKoZ.TLuC', 'dd', 'da', 'dd', 'ada', '1', 'asdda', '2018-09-25 15:56:41', null, '0');
+INSERT INTO `sys_user` VALUES ('f8c2b552542a4879bd45c641246bd408', 'asda', '$2a$10$t2D4XrSuE75zqCDIJ9n/v.poeDHIlap/5plc1y9gxC2aCKoZ.TLuC', 'dd123', 'da', 'dd', 'ada', '1', 'asdda', '2018-09-25 15:56:41', '2018-09-26 17:18:42', '0');
 INSERT INTO `sys_user` VALUES ('fdc591ee81384848abfc55b2b03087ed', 'admin5', '$2a$10$h4hHewvAQY4sdrfwCyglfePVOD1RD3r6azrHogMd6H/u34rDwez8i', 'admin5', 'admin5', 'admin5', 'admin5', '1', 'admin5', '2018-08-08 15:14:23', null, '0');
 
 -- ----------------------------

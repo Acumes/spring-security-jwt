@@ -1,5 +1,7 @@
 package com.htf.controller;
 
+import com.htf.common.annotation.LogTrackingByBean;
+import com.htf.common.annotation.LogTrackingByString;
 import com.htf.common.annotation.PermissionTracking;
 import com.htf.controller.vo.request.AddRoleRequest;
 import com.htf.controller.vo.request.RoleAuthorizationRequest;
@@ -58,6 +60,7 @@ public class RoleController extends BaseController{
             }
     )
     @PermissionTracking(methodName = "sys:role:add")
+    @LogTrackingByBean(methodName = "getId", value = AddRoleRequest.class)
     public ResponseEntity<String> addRole(@RequestBody(required = true) AddRoleRequest request){
         try {
             roleService.addRole(request);
@@ -76,6 +79,7 @@ public class RoleController extends BaseController{
             }
     )
     @PermissionTracking(methodName = "sys:role:edit")
+    @LogTrackingByBean(methodName = "getId", value = UpdateRoleRequest.class)
     public ResponseEntity<String> updateRole(@RequestBody(required = true) UpdateRoleRequest request){
         roleService.updateRole(request);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -89,6 +93,7 @@ public class RoleController extends BaseController{
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @LogTrackingByString(value = 0)
     public ResponseEntity<String> delRole(@PathVariable String id){
         roleService.delRole(id);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -103,6 +108,7 @@ public class RoleController extends BaseController{
             }
     )
     @PermissionTracking(methodName = "sys:role:delete")
+    @LogTrackingByString(value = 0)
     public ResponseEntity<String> batchDelRoles(@RequestParam String ids){
         roleService.batchDelRoles(ids);
         return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -144,7 +150,9 @@ public class RoleController extends BaseController{
                             dataType = "string", value = "authorization header", defaultValue = "Bearer ")
             }
     )
+    @LogTrackingByBean(methodName = "getRoleId", value = RoleAuthorizationRequest.class)
     public ResponseEntity<String> authorization(@PathVariable String id,@RequestBody RoleAuthorizationRequest request){
+        request.setRoleId(id);
         roleService.authorization(id, request);
         return new ResponseEntity<String>("success", HttpStatus.OK);
     }
