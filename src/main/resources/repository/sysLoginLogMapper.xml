@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htf.dao.ISysLoginLogDao">
+    <select id="getUserLoginLog" resultType="String">
+        SELECT
+        CONCAT(create_date,' ',ip, ' ' , address, ' ' , carrier) info
+        FROM sys_login_log
+        WHERE login_id = #{id}
+        ORDER BY create_date DESC
+        LIMIT 1
+    </select>
+</mapper>

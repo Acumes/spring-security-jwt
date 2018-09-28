@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htf.dao.ISysLoginLogDao">
+    <resultMap id="BaseResultMap" type="com.htf.po.SysLoginLog">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="id" jdbcType="VARCHAR" property="id" />
+        <result column="login_id" jdbcType="VARCHAR" property="loginId" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="ip" jdbcType="VARCHAR" property="ip" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="carrier" jdbcType="VARCHAR" property="carrier" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, login_id, create_date, ip, address, carrier
+    </sql>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+
+        INSERT INTO sys_login_log (id, login_id, create_date, ip, address, carrier) VALUES (#{id,jdbcType=VARCHAR}, #{loginId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{carrier,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO sys_login_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="loginId != null">
+                login_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="carrier != null">
+                carrier,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="loginId != null">
+                #{loginId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="carrier != null">
+                #{carrier,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        DELETE FROM sys_login_log
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByPrimaryKeys">
+        DELETE FROM sys_login_log where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+        #{item}
+        </foreach>
+    </delete>
+
+    <update id="updateByPrimaryKey">
+        UPDATE sys_login_log
+        <set>
+            login_id = #{loginId,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            ip = #{ip,jdbcType=VARCHAR},
+            address = #{address,jdbcType=VARCHAR},
+            carrier = #{carrier,jdbcType=VARCHAR}
+        </set>
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKeySelective">
+        UPDATE sys_login_log
+        <set>
+            <if test="loginId != null">
+                login_id = #{loginId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ip != null">
+                ip = #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="carrier != null">
+                carrier = #{carrier,jdbcType=VARCHAR}
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_login_log
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_login_log where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectByRecord" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_login_log
+        <where>
+            <if test="loginId != null">
+                AND login_id = #{loginId}
+            </if>
+            <if test="createDate != null">
+                AND create_date = #{createDate}
+            </if>
+            <if test="ip != null">
+                AND ip = #{ip}
+            </if>
+            <if test="address != null">
+                AND address = #{address}
+            </if>
+            <if test="carrier != null">
+                AND carrier = #{carrier}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByConditions" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_login_log
+        <where>
+            <if test="loginId != null">
+                AND login_id ${loginId}
+            </if>
+            <if test="createDate != null">
+                AND create_date ${createDate}
+            </if>
+            <if test="ip != null">
+                AND ip ${ip}
+            </if>
+            <if test="address != null">
+                AND address ${address}
+            </if>
+            <if test="carrier != null">
+                AND carrier ${carrier}
+            </if>
+        </where>
+            <if test="orderBy != null">
+            ORDER BY ${orderBy}
+            </if>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_login_log
+    </select>
+
+    <insert id="batchInsert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO sys_login_log (id, login_id, create_date, ip, address, carrier) values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.loginId,jdbcType=VARCHAR},
+            #{item.createDate,jdbcType=TIMESTAMP},
+            #{item.ip,jdbcType=VARCHAR},
+            #{item.address,jdbcType=VARCHAR},
+            #{item.carrier,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <update id="batchUpdate">
+        <foreach close="" collection="list" item="item" open="" separator=";">
+            UPDATE sys_login_log
+            <set>
+                <if test="item.loginId != null">
+                    login_id = #{item.loginId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.createDate != null">
+                    create_date = #{item.createDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.ip != null">
+                    ip = #{item.ip,jdbcType=VARCHAR},
+                </if>
+                <if test="item.address != null">
+                    address = #{item.address,jdbcType=VARCHAR},
+                </if>
+                <if test="item.carrier != null">
+                    carrier = #{item.carrier,jdbcType=VARCHAR}
+                </if>
+            </set>
+            WHERE id = #{item.id,jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+    <select id="count" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM sys_login_log
+    </select>
+</mapper>

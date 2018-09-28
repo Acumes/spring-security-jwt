@@ -98,6 +98,11 @@ public class MenuService implements IMenuService {
         Integer sort = sysMenuDao.getSort(request.getParentId());
         sysMenu.setSort(new BigDecimal(sort == null ? 1 : sort + 1));
         sysMenuDao.insert(sysMenu);
+        //判断是否有parentID 如果有 将关联表的checked修改为0
+        //否则授权的话 就会全部勾选
+        if(!"".equals(sysMenu.getParentId())){
+            sysMenuDao.updateRelationStatus(sysMenu.getParentId());
+        }
         return sysMenu.getId();
     }
 

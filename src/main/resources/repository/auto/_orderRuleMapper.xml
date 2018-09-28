@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htf.dao.IOrderRuleDao">
+    <resultMap id="BaseResultMap" type="com.htf.po.OrderRule">
+        <id column="order_rule_id" jdbcType="INTEGER" property="orderRuleId" />
+        <result column="order_rule_id" jdbcType="INTEGER" property="orderRuleId" />
+        <result column="biz_type" jdbcType="VARCHAR" property="bizType" />
+        <result column="order_type" jdbcType="VARCHAR" property="orderType" />
+        <result column="order_prefix" jdbcType="VARCHAR" property="orderPrefix" />
+        <result column="serial_number" jdbcType="INTEGER" property="serialNumber" />
+        <result column="company_flag" jdbcType="VARCHAR" property="companyFlag" />
+        <result column="customer_flag" jdbcType="VARCHAR" property="customerFlag" />
+        <result column="date_flag" jdbcType="VARCHAR" property="dateFlag" />
+        <result column="char_format" jdbcType="VARCHAR" property="charFormat" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+        <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        order_rule_id, biz_type, order_type, order_prefix, serial_number, company_flag, customer_flag, date_flag, char_format, create_time, create_user, company_id, status
+    </sql>
+
+    <insert id="insert" keyProperty="orderRuleId" useGeneratedKeys="true">
+
+        INSERT INTO order_rule (biz_type, order_type, order_prefix, serial_number, company_flag, customer_flag, date_flag, char_format, create_time, create_user, company_id, status) VALUES (#{bizType,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR}, #{orderPrefix,jdbcType=VARCHAR}, #{serialNumber,jdbcType=INTEGER}, #{companyFlag,jdbcType=VARCHAR}, #{customerFlag,jdbcType=VARCHAR}, #{dateFlag,jdbcType=VARCHAR}, #{charFormat,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" keyProperty="orderRuleId" useGeneratedKeys="true">
+        INSERT INTO order_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bizType != null">
+                biz_type,
+            </if>
+            <if test="orderType != null">
+                order_type,
+            </if>
+            <if test="orderPrefix != null">
+                order_prefix,
+            </if>
+            <if test="serialNumber != null">
+                serial_number,
+            </if>
+            <if test="companyFlag != null">
+                company_flag,
+            </if>
+            <if test="customerFlag != null">
+                customer_flag,
+            </if>
+            <if test="dateFlag != null">
+                date_flag,
+            </if>
+            <if test="charFormat != null">
+                char_format,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bizType != null">
+                #{bizType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderType != null">
+                #{orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPrefix != null">
+                #{orderPrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="serialNumber != null">
+                #{serialNumber,jdbcType=INTEGER},
+            </if>
+            <if test="companyFlag != null">
+                #{companyFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="customerFlag != null">
+                #{customerFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="dateFlag != null">
+                #{dateFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="charFormat != null">
+                #{charFormat,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM order_rule
+        WHERE order_rule_id = #{orderRuleId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByPrimaryKeys">
+        DELETE FROM order_rule where order_rule_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+        #{item}
+        </foreach>
+    </delete>
+
+    <update id="updateByPrimaryKey">
+        UPDATE order_rule
+        <set>
+            biz_type = #{bizType,jdbcType=VARCHAR},
+            order_type = #{orderType,jdbcType=VARCHAR},
+            order_prefix = #{orderPrefix,jdbcType=VARCHAR},
+            serial_number = #{serialNumber,jdbcType=INTEGER},
+            company_flag = #{companyFlag,jdbcType=VARCHAR},
+            customer_flag = #{customerFlag,jdbcType=VARCHAR},
+            date_flag = #{dateFlag,jdbcType=VARCHAR},
+            char_format = #{charFormat,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_user = #{createUser,jdbcType=VARCHAR},
+            company_id = #{companyId,jdbcType=VARCHAR},
+            status = #{status,jdbcType=VARCHAR}
+        </set>
+        WHERE order_rule_id = #{orderRuleId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKeySelective">
+        UPDATE order_rule
+        <set>
+            <if test="bizType != null">
+                biz_type = #{bizType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderType != null">
+                order_type = #{orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPrefix != null">
+                order_prefix = #{orderPrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="serialNumber != null">
+                serial_number = #{serialNumber,jdbcType=INTEGER},
+            </if>
+            <if test="companyFlag != null">
+                company_flag = #{companyFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="customerFlag != null">
+                customer_flag = #{customerFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="dateFlag != null">
+                date_flag = #{dateFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="charFormat != null">
+                char_format = #{charFormat,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR}
+            </if>
+        </set>
+        WHERE order_rule_id = #{orderRuleId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_rule
+        WHERE order_rule_id = #{orderRuleId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_rule where order_rule_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectByRecord" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_rule
+        <where>
+            <if test="bizType != null">
+                AND biz_type = #{bizType}
+            </if>
+            <if test="orderType != null">
+                AND order_type = #{orderType}
+            </if>
+            <if test="orderPrefix != null">
+                AND order_prefix = #{orderPrefix}
+            </if>
+            <if test="serialNumber != null">
+                AND serial_number = #{serialNumber}
+            </if>
+            <if test="companyFlag != null">
+                AND company_flag = #{companyFlag}
+            </if>
+            <if test="customerFlag != null">
+                AND customer_flag = #{customerFlag}
+            </if>
+            <if test="dateFlag != null">
+                AND date_flag = #{dateFlag}
+            </if>
+            <if test="charFormat != null">
+                AND char_format = #{charFormat}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime}
+            </if>
+            <if test="createUser != null">
+                AND create_user = #{createUser}
+            </if>
+            <if test="companyId != null">
+                AND company_id = #{companyId}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByConditions" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_rule
+        <where>
+            <if test="bizType != null">
+                AND biz_type ${bizType}
+            </if>
+            <if test="orderType != null">
+                AND order_type ${orderType}
+            </if>
+            <if test="orderPrefix != null">
+                AND order_prefix ${orderPrefix}
+            </if>
+            <if test="serialNumber != null">
+                AND serial_number ${serialNumber}
+            </if>
+            <if test="companyFlag != null">
+                AND company_flag ${companyFlag}
+            </if>
+            <if test="customerFlag != null">
+                AND customer_flag ${customerFlag}
+            </if>
+            <if test="dateFlag != null">
+                AND date_flag ${dateFlag}
+            </if>
+            <if test="charFormat != null">
+                AND char_format ${charFormat}
+            </if>
+            <if test="createTime != null">
+                AND create_time ${createTime}
+            </if>
+            <if test="createUser != null">
+                AND create_user ${createUser}
+            </if>
+            <if test="companyId != null">
+                AND company_id ${companyId}
+            </if>
+            <if test="status != null">
+                AND status ${status}
+            </if>
+        </where>
+            <if test="orderBy != null">
+            ORDER BY ${orderBy}
+            </if>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_rule
+    </select>
+
+    <insert id="batchInsert" keyProperty="orderRuleId" useGeneratedKeys="true">
+        INSERT INTO order_rule (biz_type, order_type, order_prefix, serial_number, company_flag, customer_flag, date_flag, char_format, create_time, create_user, company_id, status) values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.bizType,jdbcType=VARCHAR},
+            #{item.orderType,jdbcType=VARCHAR},
+            #{item.orderPrefix,jdbcType=VARCHAR},
+            #{item.serialNumber,jdbcType=INTEGER},
+            #{item.companyFlag,jdbcType=VARCHAR},
+            #{item.customerFlag,jdbcType=VARCHAR},
+            #{item.dateFlag,jdbcType=VARCHAR},
+            #{item.charFormat,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.createUser,jdbcType=VARCHAR},
+            #{item.companyId,jdbcType=VARCHAR},
+            #{item.status,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <update id="batchUpdate">
+        <foreach close="" collection="list" item="item" open="" separator=";">
+            UPDATE order_rule
+            <set>
+                <if test="item.bizType != null">
+                    biz_type = #{item.bizType,jdbcType=VARCHAR},
+                </if>
+                <if test="item.orderType != null">
+                    order_type = #{item.orderType,jdbcType=VARCHAR},
+                </if>
+                <if test="item.orderPrefix != null">
+                    order_prefix = #{item.orderPrefix,jdbcType=VARCHAR},
+                </if>
+                <if test="item.serialNumber != null">
+                    serial_number = #{item.serialNumber,jdbcType=INTEGER},
+                </if>
+                <if test="item.companyFlag != null">
+                    company_flag = #{item.companyFlag,jdbcType=VARCHAR},
+                </if>
+                <if test="item.customerFlag != null">
+                    customer_flag = #{item.customerFlag,jdbcType=VARCHAR},
+                </if>
+                <if test="item.dateFlag != null">
+                    date_flag = #{item.dateFlag,jdbcType=VARCHAR},
+                </if>
+                <if test="item.charFormat != null">
+                    char_format = #{item.charFormat,jdbcType=VARCHAR},
+                </if>
+                <if test="item.createTime != null">
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.createUser != null">
+                    create_user = #{item.createUser,jdbcType=VARCHAR},
+                </if>
+                <if test="item.companyId != null">
+                    company_id = #{item.companyId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.status != null">
+                    status = #{item.status,jdbcType=VARCHAR}
+                </if>
+            </set>
+            WHERE order_rule_id = #{item.orderRuleId,jdbcType=INTEGER}
+        </foreach>
+    </update>
+
+    <select id="count" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM order_rule
+    </select>
+</mapper>

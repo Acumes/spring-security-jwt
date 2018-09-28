@@ -11,6 +11,7 @@ import com.htf.controller.vo.request.UpdateUserRequest;
 import com.htf.controller.vo.request.UserRequest;
 import com.htf.controller.vo.response.UserListResult;
 import com.htf.controller.vo.response.UserResponse;
+import com.htf.dao.ISysLoginLogDao;
 import com.htf.dao.ISysRoleDao;
 import com.htf.dao.ISysUserDao;
 import com.htf.po.SysRole;
@@ -39,6 +40,8 @@ public class UserService implements IUserService {
     private ISysUserDao sysUserDao;
     @Autowired
     private ISysRoleDao sysRoleDao;
+    @Autowired
+    private ISysLoginLogDao sysLoginLogDao;
 
     @Override
     public UserResponse getUser(String id) {
@@ -74,6 +77,19 @@ public class UserService implements IUserService {
     @Override
     public List<String> getPermissions(String id){
         return sysUserDao.getPermissions(id);
+    }
+
+    @Override
+    public List<String> getUserLoginLog() {
+        AuthUser authUser = (AuthUser) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+        if(authUser == null){
+            return new ArrayList<>();
+        }
+        List<String> result = sysLoginLogDao.getUserLoginLog(authUser.getId());
+
+        return result;
     }
 
     @Override

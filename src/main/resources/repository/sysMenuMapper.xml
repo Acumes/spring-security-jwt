@@ -38,4 +38,12 @@
         DELETE FROM sys_role_menu WHERE menu_id=#{id}
     </delete>
 
+    <update id="updateRelationStatus">
+        UPDATE sys_role_menu
+        <set>
+            checked = '0'
+        </set>
+        WHERE menu_id = #{menuId,jdbcType=VARCHAR}
+    </update>
+
 </mapper>

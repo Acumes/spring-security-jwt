@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htf.dao.IOrderRuleSeqDao">
+    <resultMap id="BaseResultMap" type="com.htf.po.OrderRuleSeq">
+        <id column="rule_seq_id" jdbcType="INTEGER" property="ruleSeqId" />
+        <result column="rule_seq_id" jdbcType="INTEGER" property="ruleSeqId" />
+        <result column="order_rule_id" jdbcType="INTEGER" property="orderRuleId" />
+        <result column="rule_seq_name" jdbcType="VARCHAR" property="ruleSeqName" />
+        <result column="rule_order_company" jdbcType="VARCHAR" property="ruleOrderCompany" />
+        <result column="rule_order_customer" jdbcType="VARCHAR" property="ruleOrderCustomer" />
+        <result column="rule_order_date" jdbcType="VARCHAR" property="ruleOrderDate" />
+        <result column="rule_cur_no" jdbcType="INTEGER" property="ruleCurNo" />
+        <result column="version" jdbcType="INTEGER" property="version" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        rule_seq_id, order_rule_id, rule_seq_name, rule_order_company, rule_order_customer, rule_order_date, rule_cur_no, version, update_time, create_time
+    </sql>
+
+    <insert id="insert" keyProperty="ruleSeqId" useGeneratedKeys="true">
+
+        INSERT INTO order_rule_seq (order_rule_id, rule_seq_name, rule_order_company, rule_order_customer, rule_order_date, rule_cur_no, version, update_time, create_time) VALUES (#{orderRuleId,jdbcType=INTEGER}, #{ruleSeqName,jdbcType=VARCHAR}, #{ruleOrderCompany,jdbcType=VARCHAR}, #{ruleOrderCustomer,jdbcType=VARCHAR}, #{ruleOrderDate,jdbcType=VARCHAR}, #{ruleCurNo,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" keyProperty="ruleSeqId" useGeneratedKeys="true">
+        INSERT INTO order_rule_seq
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderRuleId != null">
+                order_rule_id,
+            </if>
+            <if test="ruleSeqName != null">
+                rule_seq_name,
+            </if>
+            <if test="ruleOrderCompany != null">
+                rule_order_company,
+            </if>
+            <if test="ruleOrderCustomer != null">
+                rule_order_customer,
+            </if>
+            <if test="ruleOrderDate != null">
+                rule_order_date,
+            </if>
+            <if test="ruleCurNo != null">
+                rule_cur_no,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderRuleId != null">
+                #{orderRuleId,jdbcType=INTEGER},
+            </if>
+            <if test="ruleSeqName != null">
+                #{ruleSeqName,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleOrderCompany != null">
+                #{ruleOrderCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleOrderCustomer != null">
+                #{ruleOrderCustomer,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleOrderDate != null">
+                #{ruleOrderDate,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleCurNo != null">
+                #{ruleCurNo,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM order_rule_seq
+        WHERE rule_seq_id = #{ruleSeqId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByPrimaryKeys">
+        DELETE FROM order_rule_seq where rule_seq_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+        #{item}
+        </foreach>
+    </delete>
+
+    <update id="updateByPrimaryKey">
+        UPDATE order_rule_seq
+        <set>
+            order_rule_id = #{orderRuleId,jdbcType=INTEGER},
+            rule_seq_name = #{ruleSeqName,jdbcType=VARCHAR},
+            rule_order_company = #{ruleOrderCompany,jdbcType=VARCHAR},
+            rule_order_customer = #{ruleOrderCustomer,jdbcType=VARCHAR},
+            rule_order_date = #{ruleOrderDate,jdbcType=VARCHAR},
+            rule_cur_no = #{ruleCurNo,jdbcType=INTEGER},
+            version = #{version,jdbcType=INTEGER},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            create_time = #{createTime,jdbcType=TIMESTAMP}
+        </set>
+        WHERE rule_seq_id = #{ruleSeqId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKeySelective">
+        UPDATE order_rule_seq
+        <set>
+            <if test="orderRuleId != null">
+                order_rule_id = #{orderRuleId,jdbcType=INTEGER},
+            </if>
+            <if test="ruleSeqName != null">
+                rule_seq_name = #{ruleSeqName,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleOrderCompany != null">
+                rule_order_company = #{ruleOrderCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleOrderCustomer != null">
+                rule_order_customer = #{ruleOrderCustomer,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleOrderDate != null">
+                rule_order_date = #{ruleOrderDate,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleCurNo != null">
+                rule_cur_no = #{ruleCurNo,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+        </set>
+        WHERE rule_seq_id = #{ruleSeqId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_rule_seq
+        WHERE rule_seq_id = #{ruleSeqId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_rule_seq where rule_seq_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectByRecord" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_rule_seq
+        <where>
+            <if test="orderRuleId != null">
+                AND order_rule_id = #{orderRuleId}
+            </if>
+            <if test="ruleSeqName != null">
+                AND rule_seq_name = #{ruleSeqName}
+            </if>
+            <if test="ruleOrderCompany != null">
+                AND rule_order_company = #{ruleOrderCompany}
+            </if>
+            <if test="ruleOrderCustomer != null">
+                AND rule_order_customer = #{ruleOrderCustomer}
+            </if>
+            <if test="ruleOrderDate != null">
+                AND rule_order_date = #{ruleOrderDate}
+            </if>
+            <if test="ruleCurNo != null">
+                AND rule_cur_no = #{ruleCurNo}
+            </if>
+            <if test="version != null">
+                AND version = #{version}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByConditions" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_rule_seq
+        <where>
+            <if test="orderRuleId != null">
+                AND order_rule_id ${orderRuleId}
+            </if>
+            <if test="ruleSeqName != null">
+                AND rule_seq_name ${ruleSeqName}
+            </if>
+            <if test="ruleOrderCompany != null">
+                AND rule_order_company ${ruleOrderCompany}
+            </if>
+            <if test="ruleOrderCustomer != null">
+                AND rule_order_customer ${ruleOrderCustomer}
+            </if>
+            <if test="ruleOrderDate != null">
+                AND rule_order_date ${ruleOrderDate}
+            </if>
+            <if test="ruleCurNo != null">
+                AND rule_cur_no ${ruleCurNo}
+            </if>
+            <if test="version != null">
+                AND version ${version}
+            </if>
+            <if test="updateTime != null">
+                AND update_time ${updateTime}
+            </if>
+            <if test="createTime != null">
+                AND create_time ${createTime}
+            </if>
+        </where>
+            <if test="orderBy != null">
+            ORDER BY ${orderBy}
+            </if>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_rule_seq
+    </select>
+
+    <insert id="batchInsert" keyProperty="ruleSeqId" useGeneratedKeys="true">
+        INSERT INTO order_rule_seq (order_rule_id, rule_seq_name, rule_order_company, rule_order_customer, rule_order_date, rule_cur_no, version, update_time, create_time) values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.orderRuleId,jdbcType=INTEGER},
+            #{item.ruleSeqName,jdbcType=VARCHAR},
+            #{item.ruleOrderCompany,jdbcType=VARCHAR},
+            #{item.ruleOrderCustomer,jdbcType=VARCHAR},
+            #{item.ruleOrderDate,jdbcType=VARCHAR},
+            #{item.ruleCurNo,jdbcType=INTEGER},
+            #{item.version,jdbcType=INTEGER},
+            #{item.updateTime,jdbcType=TIMESTAMP},
+            #{item.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <update id="batchUpdate">
+        <foreach close="" collection="list" item="item" open="" separator=";">
+            UPDATE order_rule_seq
+            <set>
+                <if test="item.orderRuleId != null">
+                    order_rule_id = #{item.orderRuleId,jdbcType=INTEGER},
+                </if>
+                <if test="item.ruleSeqName != null">
+                    rule_seq_name = #{item.ruleSeqName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.ruleOrderCompany != null">
+                    rule_order_company = #{item.ruleOrderCompany,jdbcType=VARCHAR},
+                </if>
+                <if test="item.ruleOrderCustomer != null">
+                    rule_order_customer = #{item.ruleOrderCustomer,jdbcType=VARCHAR},
+                </if>
+                <if test="item.ruleOrderDate != null">
+                    rule_order_date = #{item.ruleOrderDate,jdbcType=VARCHAR},
+                </if>
+                <if test="item.ruleCurNo != null">
+                    rule_cur_no = #{item.ruleCurNo,jdbcType=INTEGER},
+                </if>
+                <if test="item.version != null">
+                    version = #{item.version,jdbcType=INTEGER},
+                </if>
+                <if test="item.updateTime != null">
+                    update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.createTime != null">
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP}
+                </if>
+            </set>
+            WHERE rule_seq_id = #{item.ruleSeqId,jdbcType=INTEGER}
+        </foreach>
+    </update>
+
+    <select id="count" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM order_rule_seq
+    </select>
+</mapper>

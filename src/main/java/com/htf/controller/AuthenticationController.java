@@ -3,9 +3,12 @@ package com.htf.controller;
 import com.htf.common.config.security.AuthenticationTokenFilter;
 import com.htf.common.config.security.utils.TokenUtil;
 import com.htf.common.exception.ServiceException;
+import com.htf.common.utils.IpUtils;
 import com.htf.common.utils.Message;
 import com.htf.common.utils.ReturnCode;
+import com.htf.controller.vo.response.IpResponse;
 import com.htf.service.ISysCaptchaService;
+import com.htf.service.ISysLoginLogService;
 import io.swagger.annotations.*;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +76,12 @@ public class AuthenticationController extends BaseController {
     private TokenUtil jwtTokenUtil;
 
     /**
+     * 登录日志
+     */
+    @Autowired
+    private ISysLoginLogService sysLoginLogService;
+
+    /**
      * Create authentication token map.
      *
      * @param username the username
@@ -81,7 +90,7 @@ public class AuthenticationController extends BaseController {
      */
     @PostMapping(value = "/token", produces = "application/json; charset=UTF-8")
     @ApiOperation(value = "获取token")
-    public Map<String, Object> createAuthenticationToken(
+    public Map<String, Object> createAuthenticationToken(HttpServletRequest request,
             @ApiParam(required = true, value = "用户名") @RequestParam("username") String username,
             @ApiParam(required = true, value = "密码") @RequestParam("password") String password,
             @ApiParam(required = true, value = "验证码") @RequestParam("captchaCode") String captchaCode
@@ -110,6 +119,11 @@ public class AuthenticationController extends BaseController {
         tokenMap.put("expires_in", jwtTokenUtil.getExpiration());
         tokenMap.put("token_type", TokenUtil.TOKEN_TYPE_BEARER);
 
+        IpResponse ip = IpUtils.getIp(request);
+
+        if(ip != null){
+            sysLoginLogService.insert(ip);
+        }
 
         message.put(Message.RETURN_FIELD_CODE, ReturnCode.SUCCESS);
         message.put(Message.RETURN_FIELD_DATA, tokenMap);
@@ -187,20 +201,9 @@ public class AuthenticationController extends BaseController {
      * 验证码
      */
     @GetMapping("captcha")
-    public void captcha(HttpServletRequest request, HttpServletResponse response, String uuid) throws ServletException, IOException {
+    public void captcha(HttpServletResponse response, String uuid) throws ServletException, IOException {
         response.setHeader("Cache-Control", "no-store, no-cache");
         response.setContentType("image/jpeg");
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        System.out.println(ip);
 
         //获取图片验证码
         BufferedImage image = null;

@@ -34,4 +34,6 @@ public interface IUserService {
     void updateUser(UpdateUserRequest request);
 
     List<String> getPermissions(String id);
+
+    List<String> getUserLoginLog();
 }

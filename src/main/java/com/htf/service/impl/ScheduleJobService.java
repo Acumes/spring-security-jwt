@@ -95,4 +95,22 @@ public class ScheduleJobService implements IScheduleJobService {
         }
         return result;
     }
+
+    @Override
+    public void delSchedule(Long jobId) throws ServiceException {
+        ScheduleUtils.deleteScheduleJob(scheduler, jobId);
+        scheduleJobDao.deleteByPrimaryKey(jobId);
+    }
+
+    @Override
+    public void pauseSchedule(Long jobId) throws ServiceException {
+        ScheduleUtils.pauseJob(scheduler, jobId);
+        scheduleJobDao.updateStatus(jobId,1);
+    }
+
+    @Override
+    public void resumeSchedule(Long jobId) throws ServiceException {
+        ScheduleUtils.resumeJob(scheduler, jobId);
+        scheduleJobDao.updateStatus(jobId,0);
+    }
 }

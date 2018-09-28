@@ -3,6 +3,7 @@ package com.htf.common.utils;
 import com.alibaba.fastjson.JSON;
 import com.htf.controller.vo.response.IpResponse;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -45,6 +46,24 @@ public class IpUtils {
         }
         IpResponse response = JSON.parseObject(inputLine.toString(),IpResponse.class);
         return response;
+    }
+
+    public static IpResponse getIp(HttpServletRequest request){
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        if(ip.indexOf(":0") > -1){
+             ip = "127.0.0.1";
+        }
+        IpResponse publicIp = IpUtils.getPublicIp(ip);
+        return publicIp;
     }
 
     public static void main(String[] args) {

@@ -21,4 +21,6 @@ public interface ISysMenuDao extends BaseMapper<SysMenu, String> {
     List<String> getChildIds(@Param("parentId")String id);
 
     void deleteRoleMenu(@Param("id")String id);
+
+    void updateRelationStatus(@Param("menuId")String parentId);
 }

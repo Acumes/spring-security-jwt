@@ -18,4 +18,11 @@
         SELECT  <include refid="Base_Column_List"/>
         FROM schedule_job
     </select>
+    <update id="updateStatus">
+        UPDATE schedule_job
+        <set>
+            status = #{status,jdbcType=TINYINT},
+        </set>
+        WHERE job_id = #{jobId,jdbcType=BIGINT}
+    </update>
 </mapper>

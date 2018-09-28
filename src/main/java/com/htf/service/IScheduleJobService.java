@@ -15,4 +15,10 @@ public interface IScheduleJobService {
     void updateSchedule(ScheduleRequest request) throws ServiceException;
 
     ScheduleListResult getSchedules(ScheduleListRequest request);
+
+    void delSchedule(Long jobId) throws ServiceException;
+
+    void pauseSchedule(Long jobId) throws ServiceException;
+
+    void resumeSchedule(Long jobId) throws ServiceException;
 }

@@ -8,8 +8,8 @@
         <result column="create_user" jdbcType="VARCHAR" property="createUser" />
         <result column="ip" jdbcType="VARCHAR" property="ip" />
         <result column="function_name" jdbcType="VARCHAR" property="functionName" />
-        <result column="start_time" jdbcType="DATE" property="startTime" />
-        <result column="end_time" jdbcType="DATE" property="endTime" />
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
         <result column="res_json" jdbcType="VARCHAR" property="resJson" />
         <result column="req_json" jdbcType="VARCHAR" property="reqJson" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -25,7 +25,7 @@
 
     <insert id="insert" keyProperty="logId" useGeneratedKeys="true">
 
-        INSERT INTO sys_action_log (url, create_user, ip, function_name, start_time, end_time, res_json, req_json, create_time, status, log_type, external_id, http_method) VALUES (#{url,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{functionName,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{resJson,jdbcType=VARCHAR}, #{reqJson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{logType,jdbcType=VARCHAR}, #{externalId,jdbcType=VARCHAR}, #{httpMethod,jdbcType=VARCHAR})
+        INSERT INTO sys_action_log (url, create_user, ip, function_name, start_time, end_time, res_json, req_json, create_time, status, log_type, external_id, http_method) VALUES (#{url,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{functionName,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{resJson,jdbcType=VARCHAR}, #{reqJson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{logType,jdbcType=VARCHAR}, #{externalId,jdbcType=VARCHAR}, #{httpMethod,jdbcType=VARCHAR})
     </insert>
 
     <insert id="insertSelective" keyProperty="logId" useGeneratedKeys="true">
@@ -85,10 +85,10 @@
                 #{functionName,jdbcType=VARCHAR},
             </if>
             <if test="startTime != null">
-                #{startTime,jdbcType=DATE},
+                #{startTime,jdbcType=TIMESTAMP},
             </if>
             <if test="endTime != null">
-                #{endTime,jdbcType=DATE},
+                #{endTime,jdbcType=TIMESTAMP},
             </if>
             <if test="resJson != null">
                 #{resJson,jdbcType=VARCHAR},
@@ -133,8 +133,8 @@
             create_user = #{createUser,jdbcType=VARCHAR},
             ip = #{ip,jdbcType=VARCHAR},
             function_name = #{functionName,jdbcType=VARCHAR},
-            start_time = #{startTime,jdbcType=DATE},
-            end_time = #{endTime,jdbcType=DATE},
+            start_time = #{startTime,jdbcType=TIMESTAMP},
+            end_time = #{endTime,jdbcType=TIMESTAMP},
             res_json = #{resJson,jdbcType=VARCHAR},
             req_json = #{reqJson,jdbcType=VARCHAR},
             create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -162,10 +162,10 @@
                 function_name = #{functionName,jdbcType=VARCHAR},
             </if>
             <if test="startTime != null">
-                start_time = #{startTime,jdbcType=DATE},
+                start_time = #{startTime,jdbcType=TIMESTAMP},
             </if>
             <if test="endTime != null">
-                end_time = #{endTime,jdbcType=DATE},
+                end_time = #{endTime,jdbcType=TIMESTAMP},
             </if>
             <if test="resJson != null">
                 res_json = #{resJson,jdbcType=VARCHAR},
@@ -319,8 +319,8 @@
             #{item.createUser,jdbcType=VARCHAR},
             #{item.ip,jdbcType=VARCHAR},
             #{item.functionName,jdbcType=VARCHAR},
-            #{item.startTime,jdbcType=DATE},
-            #{item.endTime,jdbcType=DATE},
+            #{item.startTime,jdbcType=TIMESTAMP},
+            #{item.endTime,jdbcType=TIMESTAMP},
             #{item.resJson,jdbcType=VARCHAR},
             #{item.reqJson,jdbcType=VARCHAR},
             #{item.createTime,jdbcType=TIMESTAMP},
@@ -349,10 +349,10 @@
                     function_name = #{item.functionName,jdbcType=VARCHAR},
                 </if>
                 <if test="item.startTime != null">
-                    start_time = #{item.startTime,jdbcType=DATE},
+                    start_time = #{item.startTime,jdbcType=TIMESTAMP},
                 </if>
                 <if test="item.endTime != null">
-                    end_time = #{item.endTime,jdbcType=DATE},
+                    end_time = #{item.endTime,jdbcType=TIMESTAMP},
                 </if>
                 <if test="item.resJson != null">
                     res_json = #{item.resJson,jdbcType=VARCHAR},

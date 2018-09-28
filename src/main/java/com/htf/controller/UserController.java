@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author acumes
  * @date 2018/8/3 15:31
@@ -157,6 +159,17 @@ public class UserController extends BaseController{
         return new ResponseEntity<String>("success", HttpStatus.OK);
     }
 
-
+    @GetMapping("/loginLog")
+    @ApiOperation(value = "获取登录日志")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "Authorization", required = true, paramType = "header",
+                            dataType = "string", value = "authorization header", defaultValue = "Bearer ")
+            }
+    )
+    public ResponseEntity<List<String>> getUserLoginLog(){
+        List<String> result = userService.getUserLoginLog();
+        return new ResponseEntity<List<String>>(result, HttpStatus.OK);
+    }
 
 }
