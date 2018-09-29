@@ -9,30 +9,24 @@ import java.util.Date;
  */
 @Data
 public class OrderRuleSeq implements Serializable {
+    /* 单据规则主键 */
+    private Integer ruleSeqId;
     /* 单据规则编码 */
     private Integer orderRuleId;
-    /* 业务类型 数据字典（oms-销售，wms-仓储...） */
-    private String bizType;
-    /* 单据类型编码 */
-    private String orderType;
-    /* 前缀编码 */
-    private String orderPrefix;
-    /* 流水号位数 */
-    private Integer serialNumber;
-    /* 引用公司编码表(Y-是 N-否) */
-    private String companyFlag;
-    /* 引用客户编码标记(Y-是 N-否) */
-    private String customerFlag;
-    /* 引用日期标记（Y-是，N-否） */
-    private String dateFlag;
-    /* 日期格式 */
-    private String charFormat;
-    /* 创建时间 */
+    /* 单据规则标识-暂不启用 */
+    private String ruleSeqName;
+    /* 单据规则公司 */
+    private String ruleOrderCompany;
+    /* 单据规则客户-暂不启用 */
+    private String ruleOrderCustomer;
+    /* 单据规则时间-yyyyMMdd */
+    private String ruleOrderDate;
+    /* 当前数据编号 */
+    private Integer ruleCurNo;
+    /* 版本号（Optimistic Lock机制） */
+    private Integer version;
+    /* 更新时间 */
+    private Date updateTime;
+    /* 记录创建时间 */
     private Date createTime;
-    /* 创建用户 */
-    private String createUser;
-    /* 公司编码 */
-    private String companyId;
-    /* 状态 */
-    private String status;
 }

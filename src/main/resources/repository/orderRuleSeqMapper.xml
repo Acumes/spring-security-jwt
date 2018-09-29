@@ -2,4 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.htf.dao.IOrderRuleSeqDao">
 
+
+    <!-- 根据单据规则编码和公司编码查询单据规则序列号信息 -->
+    <select id="queryOrderRuleSeqInfo" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM order_rule_seq
+        WHERE
+        order_rule_id = #{orderRuleId} AND rule_order_company = #{ruleOrderCompany}
+    </select>
+
+
+    <!-- 插入单据规则序号信息 -->
+    <insert id="insertOrderRuleSeqInfo" parameterType="com.htf.po.OrderRuleSeq" useGeneratedKeys="true">
+         INSERT INTO order_rule_seq
+                     (order_rule_id,
+                      rule_seq_name,
+                      rule_order_company,
+                      rule_order_customer,
+                      rule_order_date,
+                      rule_cur_no,
+                      version,
+                      create_time)
+             VALUES  (#{orderRuleId},
+                      #{ruleSeqName},
+                      #{ruleOrderCompany},
+                      #{ruleOrderCustomer},
+                      #{ruleOrderDate},
+                      #{ruleCurNo},
+                      #{version},
+                      NOW())
+    </insert>
+
+    <!-- 更新单据规则序号信息 -->
+    <update id="updateOrderRuleSeqInfo" parameterType="com.htf.po.OrderRuleSeq">
+        UPDATE order_rule_seq
+        <trim prefix="set" suffixOverrides=",">
+            <if test="ruleCurNo != null and ruleCurNo != ''">
+                rule_cur_no = #{ruleCurNo},
+            </if>
+            <if test="version != null and version!= ''">
+                version = #{version},
+            </if>
+            <if test="ruleOrderDate != null and ruleOrderDate != ''">
+                rule_order_date = #{ruleOrderDate},
+            </if>
+        </trim>
+        WHERE order_rule_id = #{orderRuleId} AND rule_order_company = #{ruleOrderCompany}
+    </update>
 </mapper>

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.htf.dao.IOrderRuleDao">
-
+    <!-- 根据业务类型编码查询单据编码生成规则 -->
+    <select id="queryOrderRuleByOrderTypeId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM order_rule
+        WHERE order_type = #{orderType} AND status = '02'
+    </select>
 </mapper>

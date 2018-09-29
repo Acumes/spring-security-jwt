@@ -1,5 +1,7 @@
 package com.htf.common.utils;
 
+import org.joda.time.DateTime;
+
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -17,11 +19,34 @@ public class DateUtils {
      */
     public static Date getNowDate() {
         Date currentTime = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
         String dateString = formatter.format(currentTime);
         ParsePosition pos = new ParsePosition(8);
         Date currentTime_2 = formatter.parse(dateString, pos);
         return currentTime_2;
+    }
+
+    /**
+     * 获取现在时间 毫秒級別
+     *
+     * @return 返回时间类型 yyyy-MM-dd HH:mm:ss S
+     */
+    public static String getNowDateMillisecond() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+        return dateString;
+    }
+
+    /**
+     * 获取现在时间 毫秒級別
+     *
+     * @return 返回时间类型 yyyy-MM-dd HH:mm:ss S
+     */
+    public static Date getDateMillisecond(String dateStr) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date dateString = formatter.parse(dateStr);
+        return dateString;
     }
 
     /**
@@ -46,6 +71,38 @@ public class DateUtils {
     public static String getStringDate() {
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+        return dateString;
+    }
+
+    /**
+     * 格式化当前日期对象
+     *
+     * @param pattern
+     * @return
+     */
+    public static String format(String pattern) {
+        return format(new Date(), pattern);
+    }
+
+    /**
+     * 格式化日期对象
+     *
+     * @param date
+     * @param pattern
+     * @return
+             */
+    public static String format(Date date, String pattern) {
+        return new DateTime(date).toString(pattern);
+    }
+
+    /**
+     * 获取现在时间
+     * @return返回短时间格式 yyyy-MM-dd
+     */
+    public static String getFormatYmdString() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
         String dateString = formatter.format(currentTime);
         return dateString;
     }
